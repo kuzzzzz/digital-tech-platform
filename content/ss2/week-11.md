@@ -1,45 +1,154 @@
-# WEEK 11 - SS2 PLACEHOLDER
+# WEEKS 11–13 — REVISION AND EXAMINATIONS
 
-**Sub-topics:** Topic A . Topic B
+## WEEK 11 — REVISION
 
-## Behavioural Objectives
-1. Objective one
-2. Objective two
+### Objectives
+To consolidate all topics of the term, close the gaps revealed by the midterm test, complete outstanding practical work, and drill examination technique for both the theory and practical papers.
 
-## Entry Behaviour
-Students have completed previous weeks.
+### Suggested Two-Period Plan
 
-## Instructional Materials
-- Textbook
+**Period 1 — Applications review (45 minutes)**
 
-## PERIOD 1 (45 minutes)
+| Time | Activity |
+|---|---|
+| 8 min | Week 2 — mail merge: the three components and the seven steps, recited and written |
+| 12 min | Week 3 — cell referencing drill, nested IF, RANK, pivot table areas |
+| 12 min | Week 4 — PMT syntax, Goal Seek boxes, break-even calculation worked on the board |
+| 13 min | Week 6 — design principles, animation vs transition, embedded vs linked media |
 
-### 11.1 Introduction
-Placeholder for SS2 week 11.
+**Period 2 — Web design and examination technique (45 minutes)**
 
-## PERIOD 2 (45 minutes)
+| Time | Activity |
+|---|---|
+| 12 min | Weeks 8–9 — HTML structure, tag/element/attribute, three CSS methods, class vs id, margin vs padding |
+| 10 min | Week 10 — domain vs hosting, `.ng` second-level domains, the ten publishing steps, DNS |
+| 18 min | Timed practice: 15 objective questions plus one written-practical question, then marked together |
+| 5 min | Examination format, materials required, and the timetable |
 
-### 11.2 Main Content
-Continue here.
+### Examination Technique to Teach Explicitly
 
-## EVALUATION - WEEK 11
+**For the theory paper:**
+1. Read the whole paper first; note how many questions are required from each section.
+2. Allocate time by marks.
+3. For "state" and "list", give exactly the number requested and number the points.
+4. For "explain" and "describe", write full sentences — a bare list loses marks.
+5. For "differentiate", use a **two-column table** and compare the same feature in each row.
+6. Draw diagrams in pencil with a ruler and label every part.
+7. Never leave an objective question blank.
 
-### A. Objective Questions (1 mark each)
-1. Sample question?
- (a) Option A (b) Option B (c) Option C (d) Option D
-**Answers:** 1(b)
+**For the written practical paper — this is where SS 2 marks are won or lost:**
+1. **Write formulas exactly as they would be typed**, beginning with `=`.
+2. **Include the `$` signs** where a reference must be locked. Missing them costs marks.
+3. **Check that brackets balance** — count the IFs, then count the closing brackets.
+4. **Use the exact cell references given in the question.** Do not substitute your own.
+5. **Write HTML with both opening and closing tags**, correctly nested and indented.
+6. **Write CSS with braces and semicolons in place.** A missing semicolon is a lost mark.
+7. **When asked for steps, number them and use the real menu names** — `Mailings → Insert Merge Field`, not "click the merge button".
+8. **Show working in calculations** and state the unit; method marks are awarded even when the final figure is wrong.
 
-### B. Theory Questions
-1. Explain the main concept. **(5 marks)**
+---
 
-### C. Practical Activity
-Lab task.
+## WEEKS 12–13 — FIRST TERM EXAMINATION
 
-## TEACHER'S HELPER NOTES - WEEK 11
-Guidance.
+### Structure
 
-## RESOURCE MATERIALS - WEEK 11
-- [Resource](https://example.com)
+| Paper | Content | Marks | Time |
+|---|---|---|---|
+| **Paper 1 — Objective** | 30 multiple-choice questions | 30 | 40 min |
+| **Paper 2 — Theory** | Answer 4 of 6 questions | 40 | 1 hr 10 min |
+| **Paper 3 — Practical** | Answer 2 of 3 questions (written, or hands-on where a laboratory is available) | 20 | 40 min |
+| **Total** | | **90, scaled to 60** | 2 hr 30 min |
 
-## ASSIGNMENT
-Notebook exercises.
+*Adapt to your school's standard format. Where the practical cannot be timetabled separately, fold Paper 3 into Paper 2 as a compulsory section.*
+
+### SAMPLE THEORY QUESTIONS — SS 2 DIGITAL TECHNOLOGIES, FIRST TERM
+*Answer any FOUR questions. Each carries 10 marks.*
+
+**1.** (a) Define mail merge and name its three components. **(4 marks)**
+ (b) Outline six steps in carrying out a mail merge. **(6 marks)**
+
+**2.** (a) Differentiate between relative, absolute and mixed cell references with one example each. **(6 marks)**
+ (b) Name the four areas of a pivot table and state the function of each. **(4 marks)**
+
+**3.** (a) Define a financial model and state the inputs–calculations–outputs structure. **(5 marks)**
+ (b) A business has fixed costs of ₦240,000 a month. Each unit sells for ₦3,000 and costs ₦1,800 to produce. Calculate the contribution per unit, the break-even quantity, and the profit if 350 units are sold. **(5 marks)**
+
+**4.** (a) State five principles of professional slide design. **(5 marks)**
+ (b) Differentiate between an animation and a transition. **(2 marks)**
+ (c) State three differences between an embedded and a linked video. **(3 marks)**
+
+**5.** (a) Differentiate between a tag, an element and an attribute. **(3 marks)**
+ (b) Name the three methods of applying CSS and state which suits a multi-page site, with a reason. **(4 marks)**
+ (c) Explain the CSS box model and distinguish margin from padding. **(3 marks)**
+
+**6.** (a) Distinguish between a domain name and web hosting. **(3 marks)**
+ (b) State three Nigerian second-level domains and what each is for. **(3 marks)**
+ (c) Outline four steps in publishing a website. **(4 marks)**
+
+### SAMPLE PRACTICAL QUESTIONS
+*Answer any TWO questions. Each carries 10 marks.*
+
+**1.** A result sheet holds CA1 in D2, CA2 in E2, Assignment in F2 and Exam in G2, with totals in H2:H41.
+ (a) Write the formula for the total in H2. **(1 mark)**
+ (b) Write the formula for the position in J2. **(2 marks)**
+ (c) Write the formula counting students who scored 50 and above. **(2 marks)**
+ (d) Write a nested IF grading H2 as A1 (≥75), B2 (≥70), B3 (≥65), C4 (≥60), C5 (≥55), C6 (≥50), D7 (≥45), E8 (≥40), F9 below 40. **(5 marks)**
+
+**2.** Write the complete HTML code for a web page whose title is "My School", containing a header with a level-1 heading, a navigation bar linking to Home, About and Contact, a main section with one paragraph and a bulleted list of three subjects, one image with alt text, and a footer. Include internal CSS setting the body font, the header background colour and the navigation link colour. **(10 marks)**
+
+**3.** (a) A trader borrows ₦900,000 at 21% per annum, repayable monthly over 3 years. State the monthly rate and number of periods, and write the formula for the monthly repayment. **(4 marks)**
+ (b) Describe the steps to use Goal Seek to find the sales volume required for a target profit. **(3 marks)**
+ (c) Describe the steps to create a pivot table showing total sales by branch. **(3 marks)**
+
+### MARKING GUIDE — SELECTED ANSWERS
+
+- **Theory Q3(b):** contribution = 3,000 − 1,800 = **₦1,200**; break-even = 240,000 ÷ 1,200 = **200 units**; profit at 350 units = (350 × 1,200) − 240,000 = **₦180,000**
+- **Practical Q1:** (a) `=SUM(D2:G2)` (b) `=RANK(H2,$H$2:$H$41,0)` (c) `=COUNTIF(H2:H41,">=50")` (d) `=IF(H2>=75,"A1",IF(H2>=70,"B2",IF(H2>=65,"B3",IF(H2>=60,"C4",IF(H2>=55,"C5",IF(H2>=50,"C6",IF(H2>=45,"D7",IF(H2>=40,"E8","F9"))))))))`
+- **Practical Q3(a):** monthly rate = 21% ÷ 12 = **1.75%**; periods = **36**; `=PMT(1.75%,36,-900000)` — accept `=PMT(21%/12,36,-900000)`
+
+### End-of-Term Administration Checklist
+- [ ] All CA scores entered — test, midterm, practical file, project
+- [ ] Practical files collected, marked and returned
+- [ ] Website project marks recorded, including live addresses where published
+- [ ] Examination scripts marked and scores recorded
+- [ ] CA (40) + Exam (60) totalled and grades assigned on the WAEC scale
+- [ ] Positions computed and class average calculated
+- [ ] Report-card comments written
+- [ ] Topic-by-topic error analysis completed for Second Term planning
+- [ ] Second Term scheme previewed: *Computer Programming I & II, Programming Basics, Control Structures, Data Science Basics, Big Data & Analytics, Artificial Intelligence, Machine Learning Basics*
+- [ ] Holiday assignment issued
+- [ ] Laboratory equipment checked, cleaned and secured for the break
+
+## TEACHER'S HELPER NOTES — WEEKS 11–13
+
+- **Revise by doing, not by re-explaining.** This has been a practical term; a revision week spent lecturing wastes it. At least half of Week 11 should be students writing formulas and code while you circulate.
+- **Target the revision using your midterm data.** You already know from Week 5 which section failed. Give that topic double time whatever the plan says.
+- **The written practical paper is the unfamiliar element for most SS 2 students.** They have never before been asked to write a formula or a block of HTML by hand under timed conditions. Give at least one full timed practical rehearsal before the examination — students who meet the format for the first time in the hall lose marks to unfamiliarity rather than ignorance.
+- **Drill the four highest-yield items:** the nested IF grading formula, the `$` in RANK, the seven mail-merge steps, and the basic HTML page structure. These recur across every paper in this style and can each be secured in five minutes of daily repetition.
+- **Mark formulas and code strictly but fairly.** Award marks for the correct function, correct arguments in order, correct range and correct syntax. Accept every valid alternative — `=D2+E2+F2+G2` for `=SUM(D2:G2)`, VLOOKUP grade bands for nested IF, `<strong>` for `<b>`. Reward correct thinking, not one memorised form.
+- **Collect and mark the practical files properly.** They carry 10 CA marks and represent the term's real work. Returning them marked, before the examination, tells students exactly where they stand.
+- **Celebrate the published websites.** Show the best three to the class, or to the school at assembly. It costs five minutes and it is the strongest possible advertisement for the subject — enrolment in the following year usually reflects it.
+- **Do a proper error analysis before writing your term report.** Note which topics failed and why. Weeks 3 and 4 (spreadsheets) and Week 8 (HTML syntax) are the usual weak points, and both are prerequisites for the Second Term's programming and data-science topics. What you fix now determines how the next term runs.
+- **Preview the Second Term deliberately.** It moves from applications into **programming, data science and artificial intelligence**. Tell students that the logical thinking they used in nested IF formulas and the syntax discipline they learnt in HTML are exactly what programming requires. Framed this way, the hardest parts of this term become the foundation of the next, and students arrive in January expecting to succeed.
+
+## RESOURCE MATERIALS — WEEKS 11–13
+- Past WAEC and NECO **Data Processing** papers, **especially the practical paper**, which is the closest available match in format and marking style.
+- School's previous SS 2 First Term papers where available.
+- Students' own practical files and project folders.
+- Approved textbook end-of-chapter questions.
+- Continuous assessment record book and report-card templates.
+- Printed marking schemes for every paper.
+- **Note:** since Digital Technologies is a new subject, keep every question you write and build a departmental question bank. Share it with colleagues in other schools. Within two or three terms your department will hold a resource that does not currently exist anywhere.
+
+---
+---
+
+*End of SS 2 Digital Technologies First Term Lesson Notes.*
+
+**Prepared in line with the New NERDC Senior Secondary Scheme of Work.**
+
+| | Name | Signature | Date |
+|---|---|---|---|
+| Subject Teacher | | | |
+| Head of Department | | | |
+| Vice Principal (Academics) | | | |
