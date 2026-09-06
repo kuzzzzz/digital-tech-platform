@@ -1,0 +1,209 @@
+{
+  "id": "ss1-week-09",
+  "class": "SS1",
+  "week": 9,
+  "weekTo": null,
+  "kind": "lesson",
+  "title": "COMPUTER MAINTENANCE AND SAFETY",
+  "subtopics": [
+    "Meaning and types of maintenance",
+    "Preventive care of hardware and software",
+    "Maintenance tools",
+    "Safety of the computer",
+    "Health, safety and ergonomics for the user",
+    "Computer laboratory rules",
+    "E-waste disposal"
+  ],
+  "objectives": [
+    "explain the meaning and importance of computer maintenance;",
+    "distinguish between preventive, corrective and predictive maintenance;",
+    "list at least eight preventive maintenance practices for hardware and software;",
+    "identify at least six computer maintenance tools and their uses;",
+    "state health and safety measures for the computer user, including correct posture;",
+    "state at least ten computer laboratory rules;",
+    "explain the dangers of electronic waste and how it should be disposed of."
+  ],
+  "entryBehaviour": "Students have handled computers and phones and have seen or experienced device failure, overheating and battery problems.",
+  "materials": "A blower or hand fan, soft lint-free cloth, small screwdriver set, anti-static wrist strap, UPS and voltage stabiliser, a dusty or faulty system unit, a fire extinguisher (for demonstration only), ergonomics posture chart, first-aid box.\n\n---",
+  "periods": [
+    {
+      "n": 1,
+      "cards": [
+        {
+          "id": "9.1",
+          "heading": "Meaning and Importance of Maintenance",
+          "body": "**Computer maintenance** is the routine care, servicing and repair carried out on a computer system to keep it in good working condition and to prevent breakdown.\n\n**Importance:** prolongs the life of equipment · reduces the cost of repair and replacement · prevents unexpected data loss · maintains speed and performance · reduces downtime · keeps the working environment safe and hygienic.",
+          "answerKey": null
+        },
+        {
+          "id": "9.2",
+          "heading": "Types of Maintenance",
+          "body": "| Type | Meaning | Example |\n|---|---|---|\n| **Preventive** | Carried out *before* a fault occurs, on a schedule | Weekly dusting, monthly antivirus scan |\n| **Corrective (breakdown)** | Carried out *after* a fault has occurred | Replacing a failed power supply |\n| **Predictive** | Monitoring the system to predict failure before it happens | Disk health software warning of imminent HDD failure |\n| **Adaptive/routine** | Adjusting the system to changed conditions | Updating drivers after an OS upgrade |",
+          "answerKey": null
+        },
+        {
+          "id": "9.3",
+          "heading": "Preventive Maintenance of Hardware",
+          "body": "1. **Dust the system regularly** — use a blower or soft brush; dust blocks ventilation and causes overheating. This is especially important in Nigeria's dry, dusty harmattan season.\n2. **Clean the screen** with a soft, dry or slightly damp lint-free cloth — never with water sprayed directly onto it, and never with a rough cloth.\n3. **Keep food and drinks away** from the keyboard and system unit.\n4. **Use a UPS and a voltage stabiliser/AVR.** Nigeria's power supply fluctuates severely; sudden surges and outages destroy power supplies and corrupt data. A UPS also gives time for a proper shutdown.\n5. **Use a surge protector** on all mains connections.\n6. **Ensure proper ventilation** — do not block fan vents or place the system unit in an enclosed cupboard.\n7. **Shut down properly** through the OS; never switch off at the mains while the system is running.\n8. **Cover equipment with a dust cover** when not in use.\n9. **Handle components carefully** — hold circuit boards by the edges; wear an anti-static wrist strap or first touch a bare metal surface to discharge static electricity.\n10. **Manage cables tidily** to avoid trips, strain on ports and accidental disconnection.\n11. **Service the printer** — clean the rollers, use the right paper, do not force jammed paper.\n12. **Charge batteries correctly** and avoid leaving laptops permanently at 100% on charge in a hot room.",
+          "answerKey": null
+        },
+        {
+          "id": "9.4",
+          "heading": "Preventive Maintenance of Software",
+          "body": "1. **Install and update an antivirus**; run full scans on a schedule.\n2. **Scan every flash drive before opening it** — the commonest infection route in Nigerian schools and business centres.\n3. **Update the operating system and applications** to close security holes.\n4. **Uninstall unused programs** to free space and reduce conflicts.\n5. **Run disk cleanup** to remove temporary files.\n6. **Defragment mechanical hard disks** (not SSDs — defragmenting an SSD shortens its life).\n7. **Back up important data** regularly — to an external drive and, where data allows, to cloud storage. Follow the 3-2-1 idea: three copies, on two different media, one kept off-site.\n8. **Avoid cracked/pirated software**, which frequently carries malware.\n9. **Use strong passwords** and lock the screen when stepping away.",
+          "answerKey": null
+        },
+        {
+          "id": "9.5",
+          "heading": "Maintenance Tools",
+          "body": "| Tool | Use |\n|---|---|\n| Blower / compressed air | Blowing dust from vents, fans and boards |\n| Soft brush | Loosening dust from crevices |\n| Lint-free cloth | Cleaning screens and casings |\n| Screwdriver set (flat and Phillips) | Opening casings, fixing components |\n| Anti-static wrist strap | Preventing static discharge damage to boards |\n| Contact/foam cleaner | Cleaning ports and contacts |\n| Multimeter | Testing voltages and continuity |\n| Cable tester | Checking network cables |\n| Torch | Lighting the inside of the casing |\n| Bootable antivirus/recovery USB | Software repair and virus removal |\n\n---",
+          "answerKey": null
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "cards": [
+        {
+          "id": "9.6",
+          "heading": "Safety of the User — Health and Ergonomics",
+          "body": "**Ergonomics** is the science of designing the workplace to fit the worker so as to reduce discomfort and injury.\n\n| Hazard | Cause | Preventive measure |\n|---|---|---|\n| **Eye strain / computer vision syndrome** | Long screen exposure, glare, poor lighting | Apply the **20-20-20 rule** — every 20 minutes look at something 20 feet away for 20 seconds; use an anti-glare screen; adjust brightness; blink often; position the monitor about an arm's length away with the top at or just below eye level |\n| **Repetitive Strain Injury (RSI) / carpal tunnel syndrome** | Prolonged typing and mouse use with poor wrist position | Keep wrists straight and supported; use a wrist rest; take breaks; do hand-stretching exercises |\n| **Back and neck pain** | Poor posture, wrong chair height | Use an adjustable chair with lower-back support; sit upright with shoulders relaxed; feet flat on the floor or on a footrest; thighs parallel to the floor |\n| **Headache and fatigue** | Long unbroken sessions, poor ventilation | Take a short break every hour; ensure good ventilation and lighting |\n| **Electric shock** | Bare wires, wet hands, overloaded sockets | Insulate all wiring; never use wet hands; do not overload sockets; ensure proper earthing |\n| **Fire** | Overloaded circuits, faulty wiring, overheating | Use the correct fuse rating; keep a **CO₂ or dry-powder extinguisher** in the laboratory — **never use water on an electrical fire** |\n| **Tripping** | Loose trailing cables | Route cables along walls; use cable trunking and floor covers |\n| **Hearing damage** | Loud headphone use | Keep the volume moderate |\n\n**Correct sitting posture, in summary:** eyes level with the top of the screen · screen about an arm's length away · back straight against the chair's support · shoulders relaxed · elbows at roughly 90° · wrists straight · feet flat on the floor.",
+          "answerKey": null
+        },
+        {
+          "id": "9.7",
+          "heading": "Computer Laboratory Rules and Regulations",
+          "body": "1. Enter the laboratory only with the permission of, and in the presence of, a teacher or laboratory attendant.\n2. Do not bring food or drinks into the laboratory.\n3. Remove or clean dirty footwear; keep the laboratory free of dust and sand.\n4. Do not run or play inside the laboratory.\n5. Do not touch or tamper with electrical sockets, cables or the mains switch.\n6. Do not open a system unit without authorisation.\n7. Report any fault, spark, smell of burning or unusual noise to the teacher immediately.\n8. Do not install or download software without permission.\n9. Scan all flash drives before use.\n10. Do not change system settings, wallpapers or passwords.\n11. Log off and shut down properly before leaving.\n12. Keep the workstation tidy; arrange chairs before leaving.\n13. Do not sit on tables or place bags on the equipment.\n14. Handle all equipment gently; do not force any connector.\n15. Know the position of the fire extinguisher, first-aid box and emergency exit.",
+          "answerKey": null
+        },
+        {
+          "id": "9.8",
+          "heading": "Electronic Waste (E-Waste)",
+          "body": "**E-waste** is discarded electrical and electronic equipment — old computers, phones, batteries, printers and cables.\n\n**Dangers:** they contain lead, mercury, cadmium and other toxic substances that leach into soil and water; open burning of cables to recover copper releases poisonous fumes; informal dumping sites expose scavengers, many of them children, to serious health risks. Nigeria receives large volumes of second-hand and end-of-life electronics through its ports.\n\n**Proper handling:** repair and reuse where possible · donate working equipment to schools and community centres · hand over to certified e-waste recyclers rather than roadside scrap dealers · never burn cables or components · remove and dispose of batteries separately · comply with **NESREA** regulations on e-waste management.\n\n---",
+          "answerKey": null
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Maintenance carried out before a fault occurs is called ______.",
+      "options": [
+        "corrective",
+        "preventive",
+        "breakdown",
+        "adaptive"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "q": "The 20-20-20 rule is used to prevent ______.",
+      "options": [
+        "back pain",
+        "eye strain",
+        "electric shock",
+        "RSI"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "q": "Which fire extinguisher is suitable for an electrical fire?",
+      "options": [
+        "Water",
+        "Foam",
+        "CO₂",
+        "Sand only"
+      ],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "q": "A device that protects a computer from sudden power failure and allows safe shutdown is a ______.",
+      "options": [
+        "stabiliser",
+        "UPS",
+        "surge protector",
+        "generator"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "q": "Defragmentation should **not** be carried out on ______.",
+      "options": [
+        "HDD",
+        "SSD",
+        "floppy disk",
+        "magnetic tape"
+      ],
+      "answer": 1,
+      "explanation": ""
+    }
+  ],
+  "theoryQuestions": [
+    {
+      "text": "Define computer maintenance and state three reasons why it is necessary.",
+      "marks": 5
+    },
+    {
+      "text": "Differentiate between preventive and corrective maintenance.",
+      "marks": 4
+    },
+    {
+      "text": "List six preventive maintenance practices for computer hardware.",
+      "marks": 6
+    },
+    {
+      "text": "Name five computer maintenance tools and state the use of each.",
+      "marks": 10
+    },
+    {
+      "text": "State five health hazards associated with prolonged computer use and one preventive measure for each.",
+      "marks": 10
+    },
+    {
+      "text": "List ten computer laboratory rules.",
+      "marks": 10
+    },
+    {
+      "text": "What is e-waste? State three dangers of improper e-waste disposal.",
+      "marks": 5
+    }
+  ],
+  "practical": {
+    "heading": "Practical Activity",
+    "body": "Under supervision, students carry out a supervised clean-up of one workstation: dusting the casing and vents, wiping the screen, tidying cables, and running a disk cleanup and an antivirus quick scan. Each group records what they did on a simple maintenance log sheet.\n\n---",
+    "answerKey": null
+  },
+  "assignment": "Design a **Computer Laboratory Safety Poster** on a sheet of cardboard, containing at least eight rules, illustrated. The best five will be laminated and displayed in the laboratory. *(Counts towards the CA class-work score.)*\n\n---\n---",
+  "resources": [
+    {
+      "label": "Approved SSS Data Processing/Computer Studies text, \"Computer Maintenance and Safety\" chapter",
+      "url": null
+    },
+    {
+      "label": "NESREA (National Environmental Standards and Regulations Enforcement Agency) — e-waste regulations",
+      "url": "https://nesrea.gov.ng"
+    },
+    {
+      "label": "GCFGlobal — \"Computer Basics: Basic Troubleshooting Techniques\" and \"Cleaning your computer\"",
+      "url": "https://edu.gcfglobal.org"
+    },
+    {
+      "label": "Occupational health guidance on display-screen equipment and workstation set-up (any reputable occupational-safety site) for the ergonomics section",
+      "url": null
+    },
+    {
+      "label": "Physical aids: blower, screwdriver set, anti-static strap, UPS, stabiliser, dust cover, laboratory maintenance log sheet",
+      "url": null
+    },
+    {
+      "label": "A printed and laminated copy of the laboratory rules, displayed on the laboratory wall",
+      "url": null
+    }
+  ],
+  "teacherNotes": "- **This is the most practical and least examinable-looking lesson of the term, and students underrate it.** Tell them plainly that laboratory rules and safety measures are standard examination questions worth easy marks, and that the skills protect equipment they will one day own.\n- **The Nigerian power problem is the anchor for this whole lesson.** Every student has watched a device die from a surge or an abrupt outage. Build the UPS/stabiliser section around their own experiences and it will teach itself.\n- **Demonstrate posture rather than describing it.** Sit at a desk yourself, first badly (slouched, screen too low, wrists bent) then correctly, and let the class point out the differences. It takes three minutes and is remembered far longer than a list.\n- **Safety when demonstrating:** never open a live system unit. Unplug it, and do not open the power supply unit at any time. If you have a fire extinguisher for demonstration, show its location and read the label aloud, but do not discharge it.\n- **The flash-drive virus point is worth dwelling on.** In most Nigerian schools and business centres the shared flash drive is the single largest source of infection. Teach students to scan before opening, to be suspicious of shortcut files where their folders used to be, and never to click \"Enable Content\" on an unexpected file.\n- **Misconception:** many students believe that \"formatting\" is routine maintenance. Correct this — formatting erases all data and is a last resort, not a cleaning method.\n- **Second misconception:** that a computer that is running slowly must have a virus. Introduce the alternatives — a full disk, too many start-up programs, insufficient RAM, or overheating from dust.\n- **Make it a lasting habit, not a lesson.** Introduce a duty roster for the laboratory, with two students per week responsible for dusting and tidying, recorded on a log sheet. It reinforces the lesson every week for the rest of the term.\n- **E-waste connects to Geography, Biology and Civic Education.** If your school runs a clubs programme, this is a ready-made project for the environmental or science club.",
+  "extraSections": []
+}
