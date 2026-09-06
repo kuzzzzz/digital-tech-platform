@@ -9,7 +9,8 @@
     "lint": "next lint",
     "split": "node scripts/split-content.js",
     "parse-sample": "node scripts/test-parser.js",
-    "build-modules": "node scripts/build-modules.js"
+    "build-modules": "node scripts/build-modules.js",
+    "audit": "node scripts/audit.js"
   },
   "dependencies": {
     "next": "^14.2.5",

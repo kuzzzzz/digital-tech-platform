@@ -1,45 +1,29 @@
-# WEEK 7 - PLACEHOLDER TITLE
+# WEEK 7 — MIDTERM BREAK
 
-**Sub-topics:** Topic A . Topic B
+No formal lesson holds this week. Use the break productively.
 
-## Behavioural Objectives
-1. Objective one
-2. Objective two
+## Midterm Break Assignment / Project
+**Title: "Digital Technology in My Community"**
 
-## Entry Behaviour
-Students have completed previous weeks.
+Each student is to:
+1. Choose **one** organisation in their locality — a bank, hospital, school, church or mosque office, business centre, pharmacy, filling station or POS/agency banking shop.
+2. Find out and write up:
+ - the hardware devices in use (at least six, classified as input, output, storage or processing);
+ - the software in use (at least three, classified as system or application);
+ - two ways digital technology has improved that organisation's work;
+ - two problems they face with the technology.
+3. Present the work in **two to three pages**, handwritten or typed, with a sketch or photograph if possible.
 
-## Instructional Materials
-- Textbook
+**Submission:** first lesson of Week 8. **Marks:** 10 (counts towards the CA project score).
 
-## PERIOD 1 (45 minutes)
+**Marking guide:** Hardware identification and classification 3 · Software identification 2 · Benefits explained 2 · Problems explained 2 · Neatness and presentation 1.
 
-### 7.1 Introduction
-Placeholder for week 7.
+## TEACHER'S HELPER NOTES — WEEK 7
+- **Give the brief in Week 6, not on the last day.** Students need the whole break, and some will need to arrange permission to visit a workplace.
+- **Warn about safety and courtesy:** students must go with a parent's knowledge, must not enter restricted areas, and must ask politely before taking photographs. Some banks will not allow photography at all — a written description is acceptable and should be stated in the brief.
+- **Accept a home or family business** as the subject for students who cannot access an organisation. The learning objective is observation and classification, not the prestige of the venue.
+- **Use the best three submissions as teaching material** in Week 8 — real local examples are more persuasive than textbook ones.
+- Remind students of the resumption date and that Week 8 begins Operating Systems.
 
-## PERIOD 2 (45 minutes)
-
-### 7.2 Main Content
-Continue here.
-
-## EVALUATION - WEEK 7
-
-### A. Objective Questions (1 mark each)
-1. Sample question?
- (a) Option A (b) Option B (c) Option C (d) Option D
-**Answers:** 1(b)
-
-### B. Theory Questions
-1. Explain the main concept. **(5 marks)**
-
-### C. Practical Activity
-Lab task.
-
-## TEACHER'S HELPER NOTES - WEEK 7
-Guidance.
-
-## RESOURCE MATERIALS - WEEK 7
-- [Resource](https://example.com)
-
-## ASSIGNMENT
-Notebook exercises.
+---
+---
