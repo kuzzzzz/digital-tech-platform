@@ -1,0 +1,195 @@
+{
+  "id": "ss2-week-01",
+  "class": "SS2",
+  "week": 1,
+  "weekTo": null,
+  "kind": "lesson",
+  "title": "REVIEW OF SS 1 WORK",
+  "subtopics": [
+    "Foundations of digital technology",
+    "Number systems and data representation",
+    "Hardware and software",
+    "Operating systems",
+    "Networks and the internet",
+    "Cybersecurity and digital ethics",
+    "Office applications and databases",
+    "Emerging technologies",
+    "Diagnostic assessment"
+  ],
+  "objectives": [
+    "recall and state the key concepts covered across the three terms of SS 1;",
+    "perform number-base conversions and data-representation calculations accurately;",
+    "classify hardware and software correctly;",
+    "explain the main functions of an operating system and the basic concepts of networking and the internet;",
+    "state the main cybersecurity threats and protective measures;",
+    "identify their own areas of weakness through a diagnostic test;",
+    "state what will be required of them in SS 2 and why this term is practical."
+  ],
+  "entryBehaviour": "Students completed the full SS 1 Digital Technologies syllabus. They have used word processors, spreadsheets and presentation software at an introductory level in SS 1 Third Term.",
+  "materials": "SS 1 notebooks, chalkboard, diagnostic test papers, a computer with an office suite installed, projector where available, charts of the computer block diagram and software classification.\n\n---",
+  "periods": [
+    {
+      "n": 1,
+      "cards": [
+        {
+          "id": "1.1",
+          "heading": "First Term of SS 1 — Foundations",
+          "body": "**Digital technology** — tools and systems that generate, store, process and transmit data as discrete values (0s and 1s), as opposed to analogue systems which use continuously varying signals.\n\n**Generations of computers:** vacuum tubes → transistors → integrated circuits → microprocessors → artificial intelligence. Across the generations, size and cost fell while speed, storage and reliability rose.\n\n**Number systems — the essential conversions:**\n\n| Task | Method |\n|---|---|\n| Any base → decimal | Expansion: multiply each digit by base^position, add |\n| Decimal → any base | Repeated division; **divide down, read remainders up** |\n| Binary → octal | Group bits in **threes** from the right |\n| Binary → hexadecimal | Group bits in **fours** from the right |\n\n*Quick drill:* 156₁₀ = 10011100₂ = 234₈ = 9C₁₆\n\n**Hardware:** input unit → CPU (Control Unit + ALU + registers) → output unit, supported by memory and storage.\n- **RAM** — volatile, temporary working memory. **ROM** — non-volatile, permanent instructions.\n- **System unit** (motherboard, CPU, RAM, PSU, drives) vs **peripherals** (keyboard, monitor, printer, flash drive).\n\n**Software:**\n```\nSOFTWARE → SYSTEM (OS, utilities, translators, drivers)\n         → APPLICATION (general-purpose, special-purpose, integrated)\n```\n- **Compiler** translates the whole program at once; **interpreter** translates line by line.\n\n**Operating system functions:** booting, memory management, process scheduling, file management, device management, security, user interface, error handling.\n- **Cold booting** — starting from off. **Warm booting** — restarting a running system.\n\n**Data representation:** 8 bits = 1 byte = 1 character. ASCII ('A' = 65, 'a' = 97) for English; **Unicode** for world languages including Yoruba, Igbo and Hausa diacritics and the Naira sign ₦.\n- Image size = width × height × colour depth (bits) ÷ 8\n- Sound size = sampling rate × bit depth × channels × duration ÷ 8\n- **Lossless** compression (ZIP, PNG) preserves everything; **lossy** (JPEG, MP3) discards data permanently.",
+          "answerKey": null
+        },
+        {
+          "id": "1.2",
+          "heading": "Second Term of SS 1 — Networks, Internet and Security",
+          "body": "**Computer networks:** LAN (one building), MAN (a city), WAN (across countries — the internet is the largest WAN).\n- Components: NIC, switch, router, modem, access point, cables, server, client.\n- Topologies: bus, star, ring, mesh.\n\n**Internet technologies:** the **internet** is the global network of networks; the **World Wide Web** is one service running on it. Browsers, search engines, URLs, HTTP/HTTPS, IP addresses, domain names, ISPs.\n\n**Email and online communication:** address structure (`name@domain`), To/Cc/Bcc, attachments, etiquette, instant messaging, video conferencing.\n\n**Storage and cloud computing:** local vs cloud storage; advantages of the cloud (access anywhere, automatic backup, collaboration, scalability); disadvantages (needs internet, data costs, privacy concerns).\n\n**Cybersecurity:** threats — malware (virus, worm, Trojan, ransomware, spyware), phishing, hacking, identity theft, social engineering. Protection — antivirus, firewalls, strong and unique passwords, two-factor authentication, software updates, encryption, backups, caution with links and attachments.\n\n**Data privacy and digital ethics:** responsible use, cyberbullying, plagiarism, intellectual property, the **Nigeria Data Protection Act 2023**, the **Cybercrimes Act 2015**, digital footprint, digital citizenship.",
+          "answerKey": null
+        },
+        {
+          "id": "1.3",
+          "heading": "Third Term of SS 1 — Applications and Emerging Technologies",
+          "body": "**Word processing:** creating, formatting, editing and printing documents.\n**Spreadsheets:** cells, ranges, basic formulas (SUM, AVERAGE, MAX, MIN, COUNT), charts.\n**Presentation software:** slides, layouts, transitions, slide show.\n**Databases:** tables, records, fields, primary keys, queries, forms, reports; DBMS examples.\n**Emerging technologies:** Artificial Intelligence, Internet of Things, robotics, Virtual Reality, Augmented Reality.\n\n---",
+          "answerKey": null
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "cards": [
+        {
+          "id": "1.4",
+          "heading": "Diagnostic Test (30 minutes, 30 marks)",
+          "body": "*This test is not for grading. Tell students so. Its purpose is to show you and them exactly where SS 1 knowledge has decayed.*\n\n**Section A — Objective (15 marks)**\n1. Convert 1101101₂ to decimal.\n2. Convert 89₁₀ to hexadecimal.\n3. Convert 11010110₂ to octal using grouping.\n4. State whether RAM is volatile or non-volatile.\n5. Name the two components of the CPU.\n6. Give one example of a utility program.\n7. What does POST stand for?\n8. Differentiate cold booting from warm booting in one sentence.\n9. How many bits make a byte?\n10. What is the ASCII value of 'C'?\n11. Name the network type that covers a single building.\n12. What does HTTPS provide that HTTP does not?\n13. Name two types of malware.\n14. What does the acronym DBMS stand for?\n15. Give one example of an emerging technology.\n\n**Section B — Short answer (15 marks)**\n1. Calculate the file size in MB of an uncompressed image 1,024 × 768 pixels at 24-bit colour depth. **(5 marks)** *(Answer: 2.25 MB)*\n2. State four functions of an operating system. **(4 marks)**\n3. List three cybersecurity threats and one protective measure against each. **(6 marks)**",
+          "answerKey": "**Answers:** 1) 109 2) 59₁₆ 3) 326₈ 4) Volatile 5) Control Unit and ALU 6) Antivirus/disk cleanup/defragmenter (any) 7) Power-On Self-Test 8) Cold = starting from completely off; warm = restarting a running machine 9) 8 10) 67 11) LAN 12) Encryption/security 13) Virus, worm, Trojan, ransomware, spyware (any two) 14) Database Management System 15) AI, IoT, robotics, VR, AR (any)"
+        },
+        {
+          "id": "1.5",
+          "heading": "What SS 2 Demands — Bridging Talk (10 minutes)",
+          "body": "Write this on the board and discuss it:\n\n> **SS 1 asked: \"What is it?\" SS 2 asks: \"Can you build it?\"**\n\n| SS 1 First Term | SS 2 First Term |\n|---|---|\n| Knew what a word processor is | Runs a mail merge for 300 parents |\n| Knew what a spreadsheet is | Builds a financial model with scenarios |\n| Knew what a presentation is | Designs a professional multimedia deck |\n| Knew what a website is | **Writes the code and publishes it online** |\n\n**What this means practically for students:**\n1. **Keep a practical file.** Every exercise — printed output, or a written record of the steps and formulas used — goes into a labelled file. It is assessed and worth marks.\n2. **The examination has a practical component.** Steps and formulas must be written accurately from memory.\n3. **The term project is a working website**, built from Week 8 and published in Week 10.\n4. **Practice outside school.** Google Docs, Sheets and Slides work on any phone. So does writing HTML in a notes app.",
+          "answerKey": null
+        },
+        {
+          "id": "1.6",
+          "heading": "Correcting the Diagnostic (5 minutes)",
+          "body": "Mark by exchange, read the answers aloud, and have students record their own score. Ask each student to write down the **two topics they must revise privately** before Week 5.\n\n---",
+          "answerKey": null
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "q": "The largest wide area network in the world is the ______.",
+      "options": [
+        "LAN",
+        "MAN",
+        "internet",
+        "intranet"
+      ],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "q": "2E₁₆ in decimal is ______.",
+      "options": [
+        "44",
+        "46",
+        "214",
+        "32"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "q": "Which is **not** a function of an operating system?",
+      "options": [
+        "Memory management",
+        "File management",
+        "Typing a letter",
+        "Device management"
+      ],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "q": "Software that demands payment to unlock a user's own files is ______.",
+      "options": [
+        "spyware",
+        "ransomware",
+        "adware",
+        "freeware"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "q": "The Nigerian law governing the processing of personal data is the ______.",
+      "options": [
+        "Cybercrimes Act",
+        "Nigeria Data Protection Act",
+        "Copyright Act",
+        "NCC Act"
+      ],
+      "answer": 1,
+      "explanation": ""
+    }
+  ],
+  "theoryQuestions": [
+    {
+      "text": "Convert 205₁₀ to binary, octal and hexadecimal.",
+      "marks": 9
+    },
+    {
+      "text": "State five differences between system software and application software.",
+      "marks": 10
+    },
+    {
+      "text": "Differentiate between the internet and the World Wide Web.",
+      "marks": 4
+    },
+    {
+      "text": "List four cybersecurity threats and state one preventive measure for each.",
+      "marks": 8
+    },
+    {
+      "text": "State four advantages and two disadvantages of cloud storage.",
+      "marks": 6
+    }
+  ],
+  "practical": {
+    "heading": "Class Activity",
+    "body": "In pairs, students take turns quizzing each other from their SS 1 notebooks for ten minutes — one asks, the other answers without looking. Each pair reports the two questions that caused the most difficulty.\n\n---",
+    "answerKey": null
+  },
+  "assignment": "1. Revise, from your SS 1 notes, the two topics you identified as your weakest, and write a one-page summary of each.\n2. Find out and write down the name and version of the office software installed on any computer you can access, and list the four main programs in that suite.\n3. Bring your practical file (a labelled folder or exercise book) to the next lesson.\n\n---\n---",
+  "resources": [
+    {
+      "label": "Students' own SS 1 Digital Technologies notebooks — the primary resource for this week",
+      "url": null
+    },
+    {
+      "label": "SS 1 First Term lesson notes (companion document)",
+      "url": null
+    },
+    {
+      "label": "Approved SSS Data Processing/Computer Studies textbook, revision chapters",
+      "url": null
+    },
+    {
+      "label": "GCFGlobal — free tutorials covering the whole SS 1 range",
+      "url": "https://edu.gcfglobal.org"
+    },
+    {
+      "label": "Khan Academy — Computers and the Internet",
+      "url": "https://khanacademy.org/computing"
+    },
+    {
+      "label": "Diagnostic test papers (duplicate one per student, plus five spares)",
+      "url": null
+    },
+    {
+      "label": "Continuous assessment record book — open the SS 2 record this week",
+      "url": null
+    }
+  ],
+  "teacherNotes": "- **Do not spend the whole double period lecturing.** The temptation is to re-teach all of SS 1. Resist it. The diagnostic test is the most valuable part of this week because it tells you what to reinforce, and you cannot get that information by talking.\n- **Analyse the diagnostic properly.** Tally how many students missed each question. If more than half fail the conversions, insert a five-minute conversion drill at the start of every lesson until the midterm. If more than half fail the file-size calculation, do the same. This costs almost nothing and prevents the same failure recurring in the terminal examination.\n- **Set expectations honestly and early.** Tell students in plain terms: *this term you will be marked on what you can do, not only on what you can recall.* Some students who coasted on memorisation in SS 1 will struggle; warn them now, while they still have ten weeks to adjust.\n- **Common gap 1:** students remember *names* (pivot table, mail merge) from SS 1 but cannot perform any operation. Do not assume the SS 1 Third Term practical topics were actually taught practically — in many schools they were taught from the board only. Ask directly: *\"How many of you have personally typed in Excel?\"* Plan Weeks 2–4 around the honest answer.\n- **Common gap 2:** number-base conversions decay badly over the long holiday. Budget a full ten minutes on them in Period 1, not three.\n- **Common gap 3:** students confuse the internet with the Web, and cloud storage with \"the internet\". Correct both here, because Week 10 (hosting) depends on a clear picture of servers, domains and clients.\n- **Use this week to organise the class practically.** Fix the laboratory rotation groups now, appoint two laboratory prefects, and issue the practical-file requirement in writing. Administration done in Week 1 saves three periods later in the term.\n- **Preview the project.** Announce in Week 1 that the term ends with each student publishing a website. Students work better across ten weeks when they know what they are building towards. Some will start learning HTML on their own before Week 8 — let them.\n- **Differentiation:** identify your three or four strongest students during the diagnostic and appoint them as **peer tutors** for the practical weeks. In a class of forty with six computers, peer tutors are not a luxury; they are how the term gets taught.",
+  "extraSections": []
+}

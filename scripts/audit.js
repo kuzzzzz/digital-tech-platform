@@ -30,6 +30,16 @@ const MIN_RESOURCES = 100;   // measured ~149; must never be 0
 // a student-visible field, a marking key is on a student's screen.
 const LEAK_MARKERS = ['Worked answers', 'Marking key', '**Answers:'];
 
+// Checked against the exported HTML. Wider than LEAK_MARKERS because the
+// build can leak whole sections, not just the phrases inside them.
+const HTML_LEAK_MARKERS = [
+  'Worked answers',
+  'Marking key',
+  'MARKING GUIDE',
+  'Instructions to the Teacher',
+  "TEACHER'S HELPER",
+];
+
 function loadModules() {
   const modules = [];
   for (const cls of CLASSES) {
@@ -92,6 +102,41 @@ function unmappedAnswers(modules) {
     }
   }
   return n;
+}
+
+/**
+ * Scan the exported HTML, not just the parsed modules.
+ *
+ * The parser-level check passed while out/ss1/index.html carried the whole
+ * midterm paper and its marking guide: the class list handed full modules to
+ * a client component, and Next serialises client props into the page. Clean
+ * JSON is not the same as a clean build.
+ */
+function auditBuiltHtml() {
+  const outDir = path.join(root, 'out');
+  if (!fs.existsSync(outDir)) {
+    return { skipped: true, leaks: [] };
+  }
+  const files = [];
+  (function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.name.endsWith('.html')) files.push(full);
+    }
+  })(outDir);
+
+  const leaks = [];
+  for (const file of files) {
+    const rel = path.relative(outDir, file);
+    // /teacher is where this material is supposed to be.
+    if (rel.split(path.sep)[0] === 'teacher') continue;
+    const html = fs.readFileSync(file, 'utf8');
+    for (const marker of HTML_LEAK_MARKERS) {
+      if (html.includes(marker)) leaks.push({ file: rel, marker });
+    }
+  }
+  return { skipped: false, leaks, files: files.length };
 }
 
 function main() {
@@ -189,6 +234,20 @@ function main() {
   }
   if (leaks.length > 12) console.log(`          ... and ${leaks.length - 12} more`);
   if (leaks.length) failures.push(`${leaks.length} teacher-content leak(s)`);
+
+  const built = auditBuiltHtml();
+  if (built.skipped) {
+    console.log('\n  --    built HTML not checked (no out/ - run npm run build)');
+  } else {
+    const ok = built.leaks.length === 0;
+    console.log(`\n  ${ok ? 'ok  ' : 'FAIL'}  teacher content in built HTML: ` +
+                `${built.leaks.length} across ${built.files} pages`);
+    for (const l of built.leaks.slice(0, 12)) {
+      console.log(`          ${l.file}  contains ${JSON.stringify(l.marker)}`);
+    }
+    if (built.leaks.length > 12) console.log(`          ... and ${built.leaks.length - 12} more`);
+    if (!ok) failures.push(`${built.leaks.length} teacher-content leak(s) in built HTML`);
+  }
 
   if (failures.length) {
     console.error(`\n${failures.length} check(s) failed:`);

@@ -1,0 +1,193 @@
+{
+  "id": "ss1-week-08",
+  "class": "SS1",
+  "week": 8,
+  "weekTo": null,
+  "kind": "lesson",
+  "title": "OPERATING SYSTEMS",
+  "subtopics": [
+    "Meaning of an operating system",
+    "Functions",
+    "Types and classification",
+    "Examples",
+    "Booting process",
+    "Basic file management and command-line operations"
+  ],
+  "objectives": [
+    "define an operating system and state its position between the user and the hardware;",
+    "list and explain at least eight functions of an operating system;",
+    "classify operating systems by user interface, number of users and mode of processing;",
+    "name at least eight examples of operating systems, including mobile ones;",
+    "explain the booting process and differentiate cold from warm booting;",
+    "carry out basic file-management tasks and execute at least six command-line commands."
+  ],
+  "entryBehaviour": "Students met the operating system as one branch of system software in Week 6. Every student has used Android, iOS or Windows.",
+  "materials": "A working computer running Windows or Linux, projector where available, command-prompt screenshots, chart of OS classification, an Android phone.\n\n---",
+  "periods": [
+    {
+      "n": 1,
+      "cards": [
+        {
+          "id": "8.1",
+          "heading": "Meaning of an Operating System",
+          "body": "An **operating system (OS)** is the system software that **manages all the hardware and software resources** of a computer and provides an **interface** between the user and the machine. It is the first program loaded when a computer starts and the last to stop.\n\nWithout an OS the hardware is inert: no screen output, no keyboard input, no way to run any other program.\n\n```\n        USER\n          ↕\n   APPLICATION SOFTWARE\n          ↕\n    OPERATING SYSTEM\n          ↕\n       HARDWARE\n```",
+          "answerKey": null
+        },
+        {
+          "id": "8.2",
+          "heading": "Functions of an Operating System",
+          "body": "1. **Booting/start-up** — loading itself into memory and preparing the computer for use.\n2. **Memory management** — allocating RAM to programs, tracking what is in use, freeing memory when a program closes, and using virtual memory when RAM is exhausted.\n3. **Processor/process management (scheduling)** — deciding which program gets the CPU and for how long, so that several programs appear to run at once.\n4. **File management** — creating, naming, saving, opening, copying, moving, renaming and deleting files and folders; maintaining the directory structure.\n5. **Device/input–output management** — controlling communication with keyboards, printers, drives and other devices through **device drivers**.\n6. **Security and access control** — user accounts, passwords, permissions, protection against unauthorised access.\n7. **Providing a user interface** — the means by which the user issues commands (GUI or CLI).\n8. **Error detection and handling** — noticing faults (printer out of paper, disk full, illegal operation) and reporting them.\n9. **Resource allocation** — sharing CPU time, memory and devices fairly among competing programs.\n10. **Job scheduling and spooling** — queuing tasks, particularly print jobs held on disk until the printer is free.\n11. **System performance monitoring** — tracking response time and resource usage.",
+          "answerKey": null
+        },
+        {
+          "id": "8.3",
+          "heading": "Classification of Operating Systems",
+          "body": "**(a) By user interface**\n\n| Command Line Interface (CLI) | Graphical User Interface (GUI) |\n|---|---|\n| User types text commands | User clicks icons, menus, buttons |\n| Commands must be memorised | Intuitive, easy for beginners |\n| Uses little memory; fast | Requires more memory and processing power |\n| Precise and powerful for experts | Simpler for everyday tasks |\n| Examples: MS-DOS, Linux terminal, Windows Command Prompt | Examples: Windows, macOS, Ubuntu Desktop, Android |\n\n*The GUI is often described by the acronym **WIMP** — Windows, Icons, Menus, Pointer.*\n\n**(b) By number of users and tasks**\n- **Single-user, single-tasking** — one user, one program at a time. Example: MS-DOS.\n- **Single-user, multitasking** — one user running several programs simultaneously. Example: Windows 11, macOS.\n- **Multi-user (multi-access)** — several users share one system at the same time through terminals. Example: UNIX, Linux server editions.\n\n**(c) By mode of processing**\n- **Batch processing OS** — jobs are collected and processed together without user interaction. Used for payroll and utility billing.\n- **Time-sharing OS** — CPU time is shared in slices among many users so each seems to have the machine to themselves.\n- **Real-time OS (RTOS)** — responds within a strictly guaranteed time. Used in air-traffic control, medical monitors, industrial robots, missile guidance.\n- **Distributed OS** — manages a group of separate computers so they appear as one system.\n- **Network OS** — manages resources, users and security across a network. Example: Windows Server.\n- **Embedded OS** — built into a specific device with limited functions. Found in ATMs, POS terminals, smart TVs, routers, washing machines.\n- **Mobile OS** — designed for touchscreen handheld devices. Examples: Android, iOS.",
+          "answerKey": null
+        },
+        {
+          "id": "8.4",
+          "heading": "Examples of Operating Systems",
+          "body": "| OS | Notes |\n|---|---|\n| **MS-DOS** | Early single-user, command-line OS from Microsoft |\n| **Microsoft Windows** | Windows 7/8/10/11; dominant desktop OS in Nigerian offices and schools |\n| **macOS** | Apple desktop and laptop computers |\n| **UNIX** | Powerful multi-user OS; ancestor of Linux and macOS |\n| **Linux** | Free and open-source; distributions include Ubuntu, Fedora, Debian, Kali; runs most web servers |\n| **Android** | Google's mobile OS, built on Linux; the most widely used OS in Nigeria |\n| **iOS** | Apple's mobile OS for iPhone and iPad |\n| **Chrome OS** | Lightweight, browser-centred OS for Chromebooks |\n\n---",
+          "answerKey": null
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "cards": [
+        {
+          "id": "8.5",
+          "heading": "The Booting Process",
+          "body": "**Booting** is the process of starting a computer and loading the operating system into main memory.\n\n**Steps:**\n1. Power is switched on; the PSU supplies voltage.\n2. The **BIOS/UEFI** firmware stored in ROM takes control.\n3. **POST (Power-On Self-Test)** checks that essential hardware (RAM, keyboard, drives, graphics) is present and working. Faults are reported by beep codes or on-screen messages.\n4. BIOS locates the **boot device** and reads the **boot loader**.\n5. The boot loader loads the **kernel** — the core of the operating system — into RAM.\n6. The OS initialises drivers, services and user accounts.\n7. The login screen or desktop appears; the computer is ready.\n\n| Cold booting (hard boot) | Warm booting (soft boot) |\n|---|---|\n| Starting a computer that was completely off | Restarting a computer already on |\n| Press the power button | Use Restart, or Ctrl + Alt + Del |\n| Full POST is carried out | POST is usually skipped or shortened |\n| Takes longer | Faster |\n| Used at the start of the day or after a shutdown | Used after installing software or when a program hangs |",
+          "answerKey": null
+        },
+        {
+          "id": "8.6",
+          "heading": "File Management Concepts",
+          "body": "- **File** — a named collection of related data stored on a device.\n- **Filename and extension** — `Result.docx` (name = Result, extension = .docx identifies the type).\n- **Folder/directory** — a container that organises files.\n- **Path** — the full address of a file, e.g. `C:\\Users\\Student\\Documents\\Result.docx`\n- **Drive letters** — C: (hard disk), D: (optical drive), E:/F: (removable drives).\n\n**Common extensions:** `.docx` Word · `.xlsx` Excel · `.pptx` PowerPoint · `.pdf` portable document · `.txt` plain text · `.jpg`/`.png` images · `.mp3` audio · `.mp4` video · `.exe` executable program · `.zip` compressed archive · `.html` web page.\n\n**Basic file operations:** create, save, save as, open, rename, copy, cut, paste, move, delete, restore from Recycle Bin, search, sort, compress, set properties.",
+          "answerKey": null
+        },
+        {
+          "id": "8.7",
+          "heading": "Basic Command-Line Operations",
+          "body": "Open the Command Prompt with **Windows key + R**, type `cmd`, press Enter.\n\n| Command | Function |\n|---|---|\n| `DIR` | Lists the files and folders in the current directory |\n| `CD foldername` | Changes to the named directory |\n| `CD..` | Moves up one directory level |\n| `MD foldername` (or `MKDIR`) | Creates a new directory |\n| `RD foldername` (or `RMDIR`) | Removes an empty directory |\n| `COPY source destination` | Copies a file |\n| `DEL filename` | Deletes a file |\n| `REN oldname newname` | Renames a file |\n| `CLS` | Clears the screen |\n| `DATE` / `TIME` | Displays or sets the system date and time |\n| `VER` | Displays the operating system version |\n| `EXIT` | Closes the Command Prompt |\n\n**Guided practical:** create a folder named after the class, change into it, create a text file, list the directory, rename the file, then delete it.\n\n---",
+          "answerKey": null
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "q": "The first program loaded when a computer starts is the ______.",
+      "options": [
+        "word processor",
+        "operating system",
+        "antivirus",
+        "browser"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "q": "POST stands for ______.",
+      "options": [
+        "Power On Self Test",
+        "Program Operating System Test",
+        "Post Operation Start Test",
+        "Power Output System Test"
+      ],
+      "answer": 0,
+      "explanation": ""
+    },
+    {
+      "q": "Restarting a computer that is already on is called ______.",
+      "options": [
+        "cold booting",
+        "warm booting",
+        "formatting",
+        "spooling"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "q": "Which command lists files in a directory?",
+      "options": [
+        "CLS",
+        "DIR",
+        "MD",
+        "DEL"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "q": "An operating system used in ATMs and POS terminals is best described as ______.",
+      "options": [
+        "batch",
+        "embedded",
+        "distributed",
+        "time-sharing"
+      ],
+      "answer": 1,
+      "explanation": ""
+    }
+  ],
+  "theoryQuestions": [
+    {
+      "text": "Define an operating system and draw a diagram showing its position between the user and the hardware.",
+      "marks": 5
+    },
+    {
+      "text": "Explain any six functions of an operating system.",
+      "marks": 12
+    },
+    {
+      "text": "State five differences between a CLI and a GUI.",
+      "marks": 10
+    },
+    {
+      "text": "Describe the booting process in five steps.",
+      "marks": 5
+    },
+    {
+      "text": "Differentiate between cold booting and warm booting.",
+      "marks": 4
+    },
+    {
+      "text": "State the function of each: `DIR`, `MD`, `CD..`, `CLS`, `REN`.",
+      "marks": 5
+    }
+  ],
+  "practical": {
+    "heading": "Practical Activity",
+    "body": "Students use File Explorer to create the folder structure `SS1DT\\Week8\\Practical`, save a document inside it, then repeat the same task using only command-line commands, and note which method they found faster and why.\n\n---",
+    "answerKey": null
+  },
+  "assignment": "1. Find out the operating system and version running on any computer or phone you can access, and write down how you found it.\n2. Explain, with reasons, which type of operating system would be most suitable for (i) an aircraft autopilot (ii) a university computer laboratory serving fifty students (iii) a monthly payroll run for a company.\n\n---\n---",
+  "resources": [
+    {
+      "label": "Approved SSS Data Processing/Computer Studies text, \"Operating Systems\" chapter",
+      "url": null
+    },
+    {
+      "label": "GCFGlobal — \"Windows Basics\" and \"Computer Basics: Getting Started\"",
+      "url": "https://edu.gcfglobal.org"
+    },
+    {
+      "label": "Microsoft Learn — Windows commands reference (for the teacher's own preparation)",
+      "url": null
+    },
+    {
+      "label": "Ubuntu live USB — lets you demonstrate a second operating system on the same machine without installing it",
+      "url": "https://ubuntu.com"
+    },
+    {
+      "label": "Charts: classification of operating systems; the booting sequence",
+      "url": null
+    }
+  ],
+  "teacherNotes": "- **Command-line questions appear regularly in Nigerian examination papers**, so do not skip section 8.7 even without a laboratory. Write a mock command prompt on the board and have students \"type\" commands aloud while you write the output.\n- **If you have even one working computer, do the CLI demonstration.** Watching a folder appear in File Explorer after typing `MD` converts an abstract list of commands into something students remember. Let three or four students type a command each.\n- **Misconception 1:** students think the OS is \"the thing with the Windows logo on the screen\". Stress that Android on their phone is equally an operating system, and that a phone without one is a plastic slab.\n- **Misconception 2:** confusing the operating system with the *system unit*, or with *Microsoft Office*. Say plainly: Windows is the OS; Word is an application that runs on it.\n- **Misconception 3:** many students believe closing a program's window frees its memory instantly and that \"restarting fixes everything by magic\". Use it as a teaching point — restarting clears RAM, which is why it resolves so many problems. This reinforces Week 4's RAM/volatility lesson.\n- **Safety note for the practical:** the `DEL` and `RD` commands are irreversible from the Command Prompt — deleted items do not go to the Recycle Bin. Demonstrate on a throwaway folder only, and say this explicitly. A student who deletes a school file will remember the lesson for the wrong reason.\n- **Multi-user OS is hard to visualise** in a Nigerian classroom where most students have only seen one person per computer. Use the cyber-café server or a school network as the example, or the idea of many students logging into a school portal at once.\n- **Time management:** functions (8.2) and classification (8.3) are the examination core. If time is short, compress the booting process to five bullet points and set file management as reading.",
+  "extraSections": []
+}

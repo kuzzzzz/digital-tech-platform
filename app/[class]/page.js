@@ -1,4 +1,5 @@
 import { getAllModules, getClasses } from '../../lib/content';
+import { toCardSummary } from '../../lib/moduleMeta';
 import ModuleCard from '../../components/ModuleCard';
 
 export function generateStaticParams() {
@@ -7,7 +8,10 @@ export function generateStaticParams() {
 
 export default function ClassPage({ params }) {
   const classId = (params?.class || 'ss1').toLowerCase();
-  const modules = getAllModules(classId);
+  // Reduced to card summaries HERE, on the server. ModuleCard is a client
+  // component and every prop it takes ends up in the page HTML, so the full
+  // modules - teacher notes, marking keys, quiz answers - must not travel.
+  const cards = getAllModules(classId).map(toCardSummary);
 
   return (
     <div>
@@ -18,10 +22,10 @@ export default function ClassPage({ params }) {
       </p>
 
       <ul className="module-list">
-        {modules.map((mod) => (
+        {cards.map((card) => (
           <ModuleCard
-            key={mod.id}
-            module={mod}
+            key={card.id}
+            card={card}
             classId={classId}
             unlocked={true}
             completion={0}
@@ -29,7 +33,7 @@ export default function ClassPage({ params }) {
         ))}
       </ul>
 
-      {modules.length === 0 && (
+      {cards.length === 0 && (
         <p>No modules found. Add week-XX.md files under content/{classId}/.</p>
       )}
     </div>

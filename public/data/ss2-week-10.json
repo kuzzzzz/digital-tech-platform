@@ -1,0 +1,235 @@
+{
+  "id": "ss2-week-10",
+  "class": "SS2",
+  "week": 10,
+  "weekTo": null,
+  "kind": "lesson",
+  "title": "WEB PUBLISHING AND HOSTING",
+  "subtopics": [
+    "Domain names and their structure",
+    "Nigerian domains and NiRA",
+    "Domain registration",
+    "DNS",
+    "Types of web hosting",
+    "Choosing a host",
+    "The publishing process",
+    "SSL and HTTPS",
+    "Maintenance, SEO and legal obligations"
+  ],
+  "objectives": [
+    "explain what a domain name is and describe its structure;",
+    "identify top-level, country-code and Nigerian second-level domains;",
+    "describe how a domain name is registered and the roles of ICANN, NiRA and a registrar;",
+    "explain in outline how DNS resolves a domain name to an IP address;",
+    "define web hosting and compare shared, VPS, dedicated, cloud and free hosting;",
+    "state the criteria for choosing a web host;",
+    "outline the complete process of publishing a website;",
+    "explain SSL/HTTPS and state the legal and ethical obligations of a website owner in Nigeria;",
+    "publish a working website using a free hosting service."
+  ],
+  "entryBehaviour": "Students studied URLs, IP addresses, browsers and ISPs in SS 1 Second Term, and built a complete three-page website in Week 9.",
+  "materials": "A computer with internet access where possible; projector; students' completed project folders on flash drives; printed screenshots of a cPanel File Manager and a domain-registration page; printed publishing checklist; a WHOIS lookup printout.\n\n---",
+  "periods": [
+    {
+      "n": 1,
+      "cards": [
+        {
+          "id": "10.1",
+          "heading": "Domain Names",
+          "body": "A **domain name** is the human-readable address of a website, which stands in for the numeric **IP address** the network actually uses. `www.nitda.gov.ng` is far easier to remember than a string of numbers.\n\n**Structure of a URL:**\n```\nhttps://www.myschool.sch.ng/about.html\n│       │   │        │   │  │\n│       │   │        │   │  └── file/path\n│       │   │        │   └───── country-code TLD (.ng)\n│       │   │        └───────── second-level domain (.sch)\n│       │   └────────────────── the registered name\n│       └────────────────────── subdomain (www)\n└────────────────────────────── protocol (https)\n```\n\n**Generic top-level domains (gTLDs):**\n\n| TLD | Intended for |\n|---|---|\n| `.com` | Commercial organisations (now used by anyone) |\n| `.org` | Non-profit organisations |\n| `.net` | Network providers |\n| `.edu` | Educational institutions (largely US) |\n| `.gov` | Government (US) |\n| `.info`, `.biz`, `.online` | General purpose |\n\n**Country-code TLDs (ccTLDs):** `.ng` (Nigeria) · `.uk` · `.gh` (Ghana) · `.za` (South Africa) · `.ke` (Kenya).\n\n**Nigerian second-level domains** — administered by **NiRA**, the Nigeria Internet Registration Association:\n\n| Domain | Intended for |\n|---|---|\n| `.com.ng` | Commercial businesses in Nigeria |\n| `.org.ng` | Non-profit organisations |\n| `.gov.ng` | Federal and state government bodies |\n| `.edu.ng` | Tertiary institutions |\n| **`.sch.ng`** | **Primary and secondary schools** |\n| `.net.ng` | Network and internet service providers |\n| `.name.ng` | Individuals |\n| `.i.ng` | Short personal domains |\n\n> **Note for the class:** a Nigerian secondary school should properly register under **`.sch.ng`**. Restricted domains such as `.gov.ng` and `.edu.ng` require documentary proof of eligibility.\n\n**Who does what:**\n- **ICANN** — the international body that coordinates the global domain name system.\n- **NiRA** — the registry that manages the `.ng` namespace on behalf of Nigeria.\n- **Registrar** — the accredited company you actually buy a domain from. Nigerian examples include Whogohost, Qservers, DomainKing.ng and Web4Africa; international examples include Namecheap and GoDaddy.\n\n**Choosing a good domain name:** keep it short and easy to spell · make it memorable and relevant to the organisation · avoid hyphens and numbers where possible · choose the correct extension for the type of organisation · check it is not a registered trademark · register it before announcing the name publicly.\n\n**Related terms:**\n- **WHOIS** — a public lookup showing who registered a domain and when it expires.\n- **Renewal** — domains are rented annually, not bought outright. **A domain that is not renewed can be lost.** Nigerian organisations have lost their websites this way; make the point.\n- **Domain squatting** — registering a name someone else is likely to want, in order to resell it. Legal in many cases, but unethical when it targets an existing trademark.",
+          "answerKey": null
+        },
+        {
+          "id": "10.2",
+          "heading": "The Domain Name System (DNS)",
+          "body": "**DNS** is the system that translates domain names into IP addresses. It is often described as the internet's phone book.\n\n**What happens when a visitor types an address:**\n1. The browser checks its own cache for the IP address.\n2. If not found, it asks a **DNS resolver**, usually run by the ISP.\n3. The resolver queries the DNS hierarchy — root servers, then the TLD servers, then the domain's own **nameservers**.\n4. The IP address is returned to the browser.\n5. The browser requests the page from the **web server** at that IP address.\n6. The server sends the files back and the browser renders the page.\n\n**Common DNS records:**\n\n| Record | Purpose |\n|---|---|\n| **A** | Points a domain to an IPv4 address |\n| **AAAA** | Points a domain to an IPv6 address |\n| **CNAME** | Points one name to another name (e.g. `www` to the root domain) |\n| **MX** | Directs email for the domain to a mail server |\n| **TXT** | Holds verification and security information |\n| **NS** | Names the authoritative nameservers |\n\n> **Propagation:** after changing nameservers or DNS records, the change can take from a few minutes to 48 hours to be seen everywhere. Students should expect this and not assume something has failed.\n\n---",
+          "answerKey": null
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "cards": [
+        {
+          "id": "10.3",
+          "heading": "Web Hosting",
+          "body": "**Web hosting** is the service of storing a website's files on a **web server** that is permanently connected to the internet, so that anyone can request and view them.\n\n> A domain and hosting are two different things. The **domain is the address**; the **hosting is the land and building**. You need both.\n\n**Types of hosting:**\n\n| Type | How it works | Suits | Note |\n|---|---|---|---|\n| **Shared** | Many websites share one server and its resources | Small business and school sites | Cheapest; performance affected by neighbours |\n| **VPS** | One physical server divided into isolated virtual servers | Growing sites | More control and reliability; costs more |\n| **Dedicated** | An entire physical server for one client | Large organisations | Most powerful and most expensive |\n| **Cloud** | Resources drawn from a network of servers | Sites with variable traffic | Scalable; you pay for what you use |\n| **Reseller** | Buying hosting in bulk to resell | Web designers with several clients | A small-business model in itself |\n| **Free** | No cost, usually with a sub-domain and limits | **Students and learning projects** | GitHub Pages, Netlify, Vercel, InfinityFree |\n\n**Criteria for choosing a host:**\n1. **Uptime guarantee** — look for 99.9% or better.\n2. **Storage and bandwidth** allowances.\n3. **Speed**, and where the server is physically located. A server in or near Nigeria loads faster for Nigerian visitors.\n4. **Support** — is help available, and in what time zone?\n5. **Price**, including the renewal price, which is often much higher than the introductory price.\n6. **Free SSL certificate** included.\n7. **Control panel** — cPanel is the most common and the easiest to learn.\n8. **Backups** — automatic and restorable.\n9. **Email accounts** on your own domain.\n10. **Reputation** — check independent reviews.",
+          "answerKey": null
+        },
+        {
+          "id": "10.4",
+          "heading": "The Publishing Process",
+          "body": "| Step | Action |\n|---|---|\n| 1 | **Finish and test the site locally** — every page, link and image working |\n| 2 | **Choose and register a domain** through an accredited registrar |\n| 3 | **Buy a hosting plan** (or open a free hosting account) |\n| 4 | **Point the domain to the host** — set the host's nameservers in the registrar's control panel |\n| 5 | **Upload the files** — via cPanel **File Manager** or an **FTP client** such as FileZilla |\n| 6 | **Place the files in `public_html`** — the folder the server publishes. `index.html` must sit at its top level |\n| 7 | **Install an SSL certificate** so the site loads over HTTPS |\n| 8 | **Test the live site** on a computer and on a phone, on more than one browser |\n| 9 | **Submit to search engines** and add analytics |\n| 10 | **Maintain** — update content, renew the domain and hosting, and back up |\n\n**Uploading with FTP:** **FTP (File Transfer Protocol)** transfers files between a computer and a server. **FileZilla** is a free FTP client. It requires the host, username, password and port supplied by the host.\n\n**`public_html`** is the critical detail: files placed anywhere else on the server will not appear on the web. Say it twice.",
+          "answerKey": null
+        },
+        {
+          "id": "10.5",
+          "heading": "SSL and HTTPS",
+          "body": "An **SSL/TLS certificate** encrypts the traffic between the visitor's browser and the server. A site with a valid certificate is served over **HTTPS** and shows a padlock in the address bar.\n\n**Why it is now essential:** it protects passwords and form data in transit · browsers display a visible \"Not secure\" warning on plain HTTP · search engines rank HTTPS sites more favourably · visitors, especially on a site handling personal data, expect the padlock.\n\n**Let's Encrypt** provides free certificates, and most hosts install them automatically at the click of a button.",
+          "answerKey": null
+        },
+        {
+          "id": "10.6",
+          "heading": "Maintenance, SEO and Legal Obligations",
+          "body": "**Maintenance:** update content regularly · check for broken links · back up files · renew the domain and hosting **before** they expire · monitor uptime and speed · apply security updates.\n\n**Search Engine Optimisation — the basics:** a descriptive `<title>` on every page · a meta description · meaningful headings in proper order · `alt` text on every image · fast loading and small image files · a mobile-friendly layout · a sitemap · genuine, useful content.\n\n**Legal and ethical obligations in Nigeria:**\n- **Nigeria Data Protection Act 2023** — if a website collects personal data (names, emails, phone numbers through a contact form), the owner must handle it lawfully, state what it is used for, keep it secure, and publish a **privacy policy**.\n- **Copyright** — do not publish images, text, music or video belonging to others without permission. Use your own material or properly licensed free material.\n- **Cybercrimes Act 2015** — governs offences committed through computer systems.\n- **Accessibility** — provide alt text, sufficient colour contrast and readable font sizes so the site is usable by people with disabilities.\n- **Accuracy** — do not publish misleading claims.",
+          "answerKey": null
+        },
+        {
+          "id": "10.7",
+          "heading": "Guided Practical — Publish the Class Website",
+          "body": "**Task:** Publish the project site built in Week 9 using a **free** hosting service.\n\n**Option A — Netlify Drop (simplest, no account needed to start):**\n1. Go to the Netlify Drop page.\n2. Drag the entire project folder onto the drop area.\n3. The site is published within seconds at a generated address.\n4. Open the address on a phone to confirm it works.\n\n**Option B — GitHub Pages (a professional workflow worth learning):**\n1. Create a free GitHub account.\n2. Create a new public repository.\n3. Upload the project files, ensuring `index.html` is at the top level.\n4. Go to `Settings → Pages`, select the branch and save.\n5. The site appears at `username.github.io/repositoryname` after a short delay.\n\n**Then:**\n- Test every page and link on the live site.\n- Open it on a phone.\n- Record the live address in the practical file.\n- Note any fault found only after publishing — broken image paths and case-sensitive filenames almost always surface here, which is exactly why Week 9 warned about them.\n\n*Where there is no internet:* demonstrate the process using printed screenshots of a cPanel File Manager and a domain-registration page, and have students write out the ten publishing steps in order and complete a labelled diagram of the DNS lookup process. Set the live upload as an optional holiday task for students with access at home or at a business centre.\n\n---",
+          "answerKey": null
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "q": "The body that manages the `.ng` domain namespace is ______.",
+      "options": [
+        "ICANN",
+        "NiRA",
+        "NITDA",
+        "NCC"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "q": "The correct domain extension for a Nigerian secondary school is ______.",
+      "options": [
+        ".edu.ng",
+        ".gov.ng",
+        ".sch.ng",
+        ".org.ng"
+      ],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "q": "The system that translates domain names into IP addresses is ______.",
+      "options": [
+        "FTP",
+        "DNS",
+        "SSL",
+        "HTTP"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "q": "Website files must be uploaded into the folder named ______.",
+      "options": [
+        "www",
+        "htdocs",
+        "public_html",
+        "index"
+      ],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "q": "A padlock in the address bar indicates the site uses ______.",
+      "options": [
+        "FTP",
+        "HTTPS",
+        "DNS",
+        "CSS"
+      ],
+      "answer": 1,
+      "explanation": ""
+    }
+  ],
+  "theoryQuestions": [
+    {
+      "text": "Define a domain name and describe the structure of the URL `https://www.myschool.sch.ng/about.html`.",
+      "marks": 6
+    },
+    {
+      "text": "State four Nigerian second-level domains and the type of organisation each is intended for.",
+      "marks": 8
+    },
+    {
+      "text": "Distinguish between a domain name and web hosting.",
+      "marks": 4
+    },
+    {
+      "text": "Explain how DNS resolves a domain name into an IP address.",
+      "marks": 6
+    },
+    {
+      "text": "Compare shared, VPS and dedicated hosting under cost, control and suitability.",
+      "marks": 9
+    },
+    {
+      "text": "State six criteria to consider when choosing a web host.",
+      "marks": 6
+    },
+    {
+      "text": "Outline, in order, the steps involved in publishing a website.",
+      "marks": 10
+    },
+    {
+      "text": "What is an SSL certificate? State three reasons why HTTPS is now essential.",
+      "marks": 5
+    },
+    {
+      "text": "State three legal or ethical obligations of a website owner in Nigeria.",
+      "marks": 6
+    }
+  ],
+  "practical": {
+    "heading": "Practical Questions",
+    "body": "1. A school wishes to put its website online. Describe, step by step, everything it must do from choosing a name to having the site live and secure. **(10 marks)**\n2. A student uploads her files but the browser shows a directory listing instead of her web page. State two possible causes and the correction for each. **(4 marks)**\n *(Expected: the home page is not named `index.html`; or the files were placed in a sub-folder instead of at the top of `public_html`.)*\n3. State four checks to carry out immediately after publishing a site. **(4 marks)**\n\n---",
+    "answerKey": null
+  },
+  "assignment": "1. Publish your project website and write down the live address. If you have no internet access, write out the complete ten-step publishing process in order and draw a labelled diagram of how DNS resolves a domain name.\n2. Visit any three Nigerian websites and record, for each: the domain extension used, whether it is served over HTTPS, and whether it displays properly on a phone. Comment on what you find.\n3. Compare the price of a `.com.ng` domain across two Nigerian registrars and one international registrar, and state which offers the better value and why.\n4. Write a short privacy policy (about 100 words) for a website that collects a visitor's name, email address and message through a contact form.\n\n---\n---",
+  "resources": [
+    {
+      "label": "NiRA — Nigeria Internet Registration Association: — the authoritative source on domains and accredited registrars",
+      "url": "https://nira.org.ng"
+    },
+    {
+      "label": "NITDA: and the Nigeria Data Protection Commission for the NDPA 2023",
+      "url": "https://nitda.gov.ng"
+    },
+    {
+      "label": "Netlify Drop — publish a folder in seconds, free",
+      "url": "https://netlify.com"
+    },
+    {
+      "label": "GitHub Pages — free hosting with a professional workflow",
+      "url": "https://pages.github.com"
+    },
+    {
+      "label": "FileZilla — free FTP client",
+      "url": "https://filezilla-project.org"
+    },
+    {
+      "label": "Let's Encrypt — free SSL certificates",
+      "url": "https://letsencrypt.org"
+    },
+    {
+      "label": "W3Schools — How to Publish Your Website",
+      "url": "https://w3schools.com"
+    },
+    {
+      "label": "Google Search Central — SEO starter guide",
+      "url": "https://developers.google.com/search"
+    },
+    {
+      "label": "Nigerian registrars for a live price comparison exercise: Whogohost, Qservers, DomainKing.ng, Web4Africa",
+      "url": null
+    },
+    {
+      "label": "Printed screenshots: cPanel dashboard, File Manager showing , a domain search result page, a WHOIS record",
+      "url": null
+    },
+    {
+      "label": "Printed publishing checklist, one per student",
+      "url": null
+    }
+  ],
+  "teacherNotes": "- **This week converts a school exercise into something real.** When a student opens their own website on their own phone, over mobile data, the abstraction of ten weeks collapses into a concrete achievement. Make sure it happens for as many students as possible — a shared class site published together is far better than nothing.\n- **Prepare before the lesson.** Create your own free hosting account beforehand and have a demonstration site ready. Registering an account live in front of forty students, with verification emails and a slow connection, will consume the whole period.\n- **Netlify Drop is the fastest route** for a class with limited time — a folder is dragged in and the site is live in seconds, with no account required to start. GitHub Pages takes longer but teaches a workflow students will meet again in any technical career. Use Netlify if you have one period, GitHub if you have two.\n- **The domain-versus-hosting distinction is the concept students most often confuse.** Use the analogy repeatedly: *the domain is the address written on an envelope; the hosting is the actual house.* Paying for one does not give you the other. Ask them directly which one they would still need if they had the other, and why.\n- **Make the `.sch.ng` point concrete.** Have students check whether their own school has a website and, if so, what its domain is. Many Nigerian schools use `.com` or a free sub-domain. It leads naturally to a discussion of what the correct extension signals about an organisation.\n- **The renewal warning matters.** Domains are rented, not owned. Organisations lose their websites and their email addresses by failing to renew. Students who go on to build sites for family businesses need to know this.\n- **Common error 1 — the home page is not `index.html`.** The server then shows a file listing or a 404. This is the single most frequent publishing failure and it is trivially fixed once understood.\n- **Common error 2 — files uploaded into a sub-folder** inside `public_html` instead of at its top level, so the site appears at `/myschool/` or not at all.\n- **Common error 3 — case-sensitive filenames.** Links and images that worked perfectly on Windows break on the Linux server. When this happens to a student in class, use it: it is the Week 9 warning arriving on schedule, and the lesson will stick.\n- **Common error 4 — impatience with DNS propagation.** Students change nameservers and expect an instant result. Tell them in advance that it can take hours.\n- **Handle the legal section seriously, not as a footnote.** A contact form that collects names, emails and phone numbers brings the site owner under the **Nigeria Data Protection Act 2023**. Students building sites for family businesses need to know that a privacy policy is a legal expectation, not decoration. This also closes the loop with SS 1's data privacy and digital ethics topic.\n- **Low-resource adaptation:** printed screenshots of cPanel, the File Manager and a registrar's domain search page allow the whole process to be taught convincingly without connectivity. Have students complete a labelled DNS diagram and write out the ten publishing steps in order — both are examinable in exactly that form.\n- **Careers link:** end the term by naming the work this leads to — front-end developer, web designer, hosting reseller, digital marketer, SEO specialist. Several are freelance and can be done from anywhere with a laptop and a connection. For students in a Nigerian classroom, that is a concrete and reachable prospect, and it is the right note on which to finish the term.\n- **Differentiation:** stronger students should register a real free sub-domain, add a favicon, submit a sitemap and set up basic analytics. Weaker students should focus on the ten publishing steps and the domain/hosting distinction, both of which carry examination marks.",
+  "extraSections": []
+}

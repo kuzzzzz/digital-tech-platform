@@ -1,0 +1,192 @@
+{
+  "id": "ss1-week-06",
+  "class": "SS1",
+  "week": 6,
+  "weekTo": null,
+  "kind": "lesson",
+  "title": "COMPUTER SOFTWARE",
+  "subtopics": [
+    "Meaning of software",
+    "System software",
+    "Application software",
+    "Utility programs",
+    "Language translators",
+    "Software licensing and piracy"
+  ],
+  "objectives": [
+    "define computer software and distinguish it clearly from hardware;",
+    "draw and explain the classification chart of computer software;",
+    "describe system software and its four components;",
+    "differentiate between a compiler, an interpreter and an assembler;",
+    "list and describe at least six utility programs;",
+    "distinguish between general-purpose and special-purpose application software;",
+    "explain software licensing types and the consequences of software piracy."
+  ],
+  "entryBehaviour": "Students learnt hardware in Week 4 and use applications (WhatsApp, Word, browsers) daily.",
+  "materials": "A computer with Windows/Linux installed, a genuine software CD or licence card, screenshots or a projector, chart showing software classification, an antivirus installation.\n\n---",
+  "periods": [
+    {
+      "n": 1,
+      "cards": [
+        {
+          "id": "6.1",
+          "heading": "Meaning of Software",
+          "body": "**Software** is a set of coded **instructions (programs)** that tells the computer hardware what to do and how to do it. Software is **intangible** — it can be stored, copied and installed, but it cannot be touched.\n\n| Hardware | Software |\n|---|---|\n| Physical and tangible | Logical and intangible |\n| Can be damaged by shock, water, heat | Can be corrupted by viruses or bugs |\n| Wears out over time | Does not wear out; becomes obsolete |\n| Replaced when faulty | Repaired by debugging, patching or reinstallation |\n| Manufactured | Developed/programmed |\n| Example: keyboard, CPU | Example: Windows, MS Word |",
+          "answerKey": null
+        },
+        {
+          "id": "6.2",
+          "heading": "Classification of Software",
+          "body": "```\n                    COMPUTER SOFTWARE\n                           │\n        ┌──────────────────┴──────────────────┐\n   SYSTEM SOFTWARE                    APPLICATION SOFTWARE\n        │                                     │\n ┌──────┼──────┬────────────┐        ┌────────┴────────┐\nOperating  Utility  Language  Device  General-purpose  Special-purpose\n System   Programs Translators Drivers  (off-the-shelf)   (custom/bespoke)\n```",
+          "answerKey": null
+        },
+        {
+          "id": "6.3",
+          "heading": "System Software",
+          "body": "Software that manages and controls the computer itself and provides a platform on which application software runs.\n\n**(a) Operating System** — the master control program (treated fully in Week 8). Examples: Windows, macOS, Linux, Android, iOS.\n\n**(b) Utility programs** — small housekeeping programs that maintain and optimise the system:\n\n| Utility | Purpose |\n|---|---|\n| Antivirus | Detects, quarantines and removes malicious software |\n| Disk defragmenter | Reorganises scattered file fragments to speed up access |\n| Disk cleanup | Removes temporary and unwanted files to recover space |\n| Backup and restore | Makes copies of data for recovery after loss |\n| File compression | Reduces file size for storage/transfer (WinRAR, 7-Zip) |\n| File manager | Organises files and folders (Windows File Explorer) |\n| Disk partitioning | Divides a drive into logical sections |\n| Screen saver | Prevents screen burn-in; provides basic privacy |\n| Device manager | Monitors and configures connected hardware |\n\n**(c) Language translators** — convert program code into machine language the CPU can execute:\n\n| Translator | Converts | How it works |\n|---|---|---|\n| **Assembler** | Assembly language → machine language | Line-for-line translation of mnemonics |\n| **Compiler** | High-level language → machine language | Translates the **entire program at once**, produces an executable file, reports all errors together, faster execution. Used by C, C++, Java |\n| **Interpreter** | High-level language → machine language | Translates and executes **line by line**, stops at the first error, slower execution but easier to debug. Used by Python, BASIC, JavaScript |\n\n**(d) Device drivers** — programs that enable the operating system to communicate with a specific hardware device (printer driver, graphics driver).\n\n**(e) Firmware** — software permanently written into a hardware chip, e.g. **BIOS/UEFI**.\n\n---",
+          "answerKey": null
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "cards": [
+        {
+          "id": "6.4",
+          "heading": "Application Software",
+          "body": "Programs written to help the **user** perform specific real-world tasks.\n\n**(a) General-purpose (off-the-shelf) packages** — ready-made, sold to the public, used by many different people:\n\n| Type | Purpose | Examples |\n|---|---|---|\n| Word processor | Typing and formatting documents | MS Word, Google Docs, LibreOffice Writer, WPS Office |\n| Spreadsheet | Calculations, tables, charts | MS Excel, Google Sheets |\n| Presentation | Slide shows | MS PowerPoint, Google Slides, Canva |\n| Database management (DBMS) | Storing and querying structured data | MS Access, MySQL, Oracle |\n| Graphics/design | Images and layout | CorelDRAW, Adobe Photoshop, GIMP, Canva |\n| Web browser | Accessing the internet | Chrome, Firefox, Edge, Opera Mini |\n| Media player | Playing audio and video | VLC, Windows Media Player |\n| Communication | Messaging and meetings | WhatsApp, Zoom, Google Meet |\n| Accounting | Business records | Sage, QuickBooks, Peachtree |\n\n**(b) Special-purpose (custom/bespoke/tailor-made) software** — written for one organisation's specific need:\n- A school's own result-processing and portal system.\n- A bank's core banking application.\n- The **JAMB CBT examination software**.\n- INEC's result-transmission system.\n- Hospital patient-records software.\n\n| General-purpose | Special-purpose |\n|---|---|\n| Ready-made, buy and use immediately | Takes months to develop |\n| Cheaper (cost shared among many buyers) | Expensive (one client bears the cost) |\n| May contain unneeded features | Fits the organisation exactly |\n| Well tested by many users | Errors may only surface in use |\n| Support and tutorials widely available | Support depends on the developer |\n\n**(c) Integrated packages / software suites** — several applications bundled to work together: Microsoft Office, Google Workspace, LibreOffice, WPS Office.",
+          "answerKey": null
+        },
+        {
+          "id": "6.5",
+          "heading": "Software Acquisition and Licensing",
+          "body": "| Type | Meaning |\n|---|---|\n| **Commercial/proprietary** | Bought with a licence; source code kept secret (Windows, MS Office) |\n| **Freeware** | Free to use, but source code not released (Adobe Reader, Opera) |\n| **Shareware** | Free trial for a limited period or with limited features, then payment required |\n| **Open-source** | Free, and the source code may be studied and modified (Linux, LibreOffice, GIMP, Python) |\n| **Subscription / SaaS** | Paid periodically and used online (Microsoft 365, Google Workspace, Adobe Creative Cloud) |\n\n**Software piracy** is the unauthorised copying, distribution or use of licensed software. It is a criminal offence under Nigerian copyright law, enforced by the **Nigerian Copyright Commission**. Consequences include prosecution and fines, loss of updates and technical support, exposure to viruses hidden in cracked installers, system instability, and loss of revenue that would fund further software development in Nigeria.",
+          "answerKey": null
+        },
+        {
+          "id": "6.6",
+          "heading": "Criteria for Selecting Software",
+          "body": "Suitability for the task · Hardware compatibility (system requirements) · Cost and licensing terms · Ease of learning and use · Availability of support and training · Security and reliability · Upgrade path and vendor reputation · Portability across devices.\n\n---",
+          "answerKey": null
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Software that controls the computer itself is called ______ software.",
+      "options": [
+        "application",
+        "system",
+        "bespoke",
+        "integrated"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "q": "Which translator converts the whole program at once?",
+      "options": [
+        "Assembler",
+        "Interpreter",
+        "Compiler",
+        "Linker"
+      ],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "q": "Free software whose source code can be modified is called ______.",
+      "options": [
+        "freeware",
+        "shareware",
+        "open-source",
+        "firmware"
+      ],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "q": "Which of these is a utility program?",
+      "options": [
+        "MS Word",
+        "Disk defragmenter",
+        "Windows 11",
+        "Chrome"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "q": "The JAMB CBT examination program is an example of ______ software.",
+      "options": [
+        "general-purpose",
+        "special-purpose",
+        "utility",
+        "system"
+      ],
+      "answer": 1,
+      "explanation": ""
+    }
+  ],
+  "theoryQuestions": [
+    {
+      "text": "Define computer software and state five differences between hardware and software.",
+      "marks": 12
+    },
+    {
+      "text": "Draw the classification chart of computer software.",
+      "marks": 6
+    },
+    {
+      "text": "Differentiate between a compiler and an interpreter in four ways.",
+      "marks": 8
+    },
+    {
+      "text": "Name five utility programs and state the function of each.",
+      "marks": 10
+    },
+    {
+      "text": "Distinguish between general-purpose and special-purpose software, giving two examples of each.",
+      "marks": 8
+    },
+    {
+      "text": "What is software piracy? State four of its consequences.",
+      "marks": 6
+    }
+  ],
+  "practical": {
+    "heading": "Class Activity",
+    "body": "Students list every application installed on their own phone, classify each as system or application software, and identify which are freeware, which are paid and which came pre-installed.\n\n---",
+    "answerKey": null
+  },
+  "assignment": "1. Identify five software packages used in a bank, hospital or school near you and state what each is used for.\n2. Explain in your own words why an organisation might pay millions for custom software when a ready-made package costs far less.\n\n---\n---",
+  "resources": [
+    {
+      "label": "Approved SSS Data Processing/Computer Studies text, \"Computer Software\" chapter",
+      "url": null
+    },
+    {
+      "label": "GCFGlobal — \"Understanding Applications\"",
+      "url": "https://edu.gcfglobal.org"
+    },
+    {
+      "label": "LibreOffice (free full office suite, works on low-specification machines)",
+      "url": "https://libreoffice.org"
+    },
+    {
+      "label": "WPS Office — light, popular in Nigeria, has a free tier",
+      "url": null
+    },
+    {
+      "label": "Nigerian Copyright Commission: — for the legal position on piracy",
+      "url": "https://copyright.gov.ng"
+    },
+    {
+      "label": "A genuine software licence card or product-key sticker to pass round",
+      "url": null
+    }
+  ],
+  "teacherNotes": "- **The classification chart is the spine of this lesson.** Draw it on the board first, before any explanation, and keep it there for both periods. Every new term you introduce should be pointed to on the chart. Students who can reproduce the chart can answer most examination questions on software.\n- **Misconception 1:** students think \"software\" means only the things with icons on the desktop. Point out that Windows itself is software, the printer driver is software, and the program inside the ATM is software.\n- **Misconception 2:** confusing the *operating system* with *utility programs*. The OS is the manager; utilities are the cleaners and maintenance staff.\n- **The compiler-vs-interpreter difference is examined almost every year.** Give a memorable framing: *a compiler is a translator who reads the whole letter and hands you the finished translation; an interpreter stands beside you and translates sentence by sentence as the speaker talks.* Then add the consequence — the compiler tells you all your errors at once; the interpreter stops you at the first one.\n- **Handle piracy honestly.** Cracked software is common and students know it. Rather than moralising alone, give the practical argument: cracked installers are the single most common source of the malware that wipes a student's project the night before submission. Then introduce the free legal alternatives — **LibreOffice, WPS Office, GIMP, Canva free tier, Google Docs** — all of which run on modest machines. This is genuinely useful advice in a Nigerian classroom.\n- **If you have one computer only**, project or gather students round and open Task Manager (Ctrl+Shift+Esc) to show the number of programs running at once. It makes \"software\" concrete.\n- **Time trap:** the application-software table is long. Explain word processor, spreadsheet, DBMS and browser thoroughly; let the rest be copied.\n- **Preview Week 8** by ending the lesson with: *\"Of all system software, one is the master. Next lesson we study it.\"*",
+  "extraSections": []
+}
