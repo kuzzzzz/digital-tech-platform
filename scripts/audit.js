@@ -116,9 +116,18 @@ function unmappedAnswers(modules) {
  */
 // Files a student is meant to be able to fetch. Everything else under out/
 // - the /teacher page and data/teacher/*.json - is allowed to hold answers.
+/**
+ * The one part of the export that is allowed to hold teacher material: the
+ * rendered /teacher page.
+ *
+ * data/teacher/ used to be exempt too, back when the teacher page was expected
+ * to fetch its JSON. It never did, so those 22 files shipped unread and were
+ * the only place the marking guides appeared anywhere in the build. They are no
+ * longer written, and the exemption is gone with them - if they ever come back,
+ * this check should fail rather than wave them through.
+ */
 function isTeacherPath(rel) {
-  const parts = rel.split(path.sep);
-  return parts[0] === 'teacher' || (parts[0] === 'data' && parts[1] === 'teacher');
+  return rel.split(path.sep)[0] === 'teacher';
 }
 
 function auditBuiltOutput() {
@@ -255,11 +264,31 @@ function auditPrecache() {
     ? fs.readdirSync(dataDir).filter((f) => f.endsWith('.json')).sort()
     : [];
 
+  // The pages matter more than the JSON, and the JSON check alone would not
+  // notice them going missing. Since the lesson is rendered into the page,
+  // a week page that drops out of the precache is a week that is simply gone
+  // when a student opens the app at home - which is the failure this whole
+  // list exists to prevent.
+  const pages = [];
+  (function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.name === 'index.html') {
+        const rel = path.relative(outDir, full).split(path.sep).join('/');
+        // /teacher is not for a student's phone, and 404 has nothing to cache.
+        if (!/^teacher\//.test(rel) && !/^404\//.test(rel)) pages.push(rel);
+      }
+    }
+  })(outDir);
+
   return {
     skipped: false,
     precached: list.size,
     modules: modules.length,
     missing: modules.filter((f) => !list.has(`./data/${f}`)),
+    pages: pages.length,
+    missingPages: pages.filter((rel) => !list.has(`./${rel}`)),
   };
 }
 
@@ -396,10 +425,17 @@ function main() {
     console.log('  FAIL  precache list unreadable in out/sw.js');
     failures.push('could not read the PRECACHE list out of out/sw.js');
   } else {
-    const ok = pre.missing.length === 0 && pre.modules === TARGETS.modules;
-    console.log(`  ${ok ? 'ok  ' : 'FAIL'}  precache covers ${pre.modules - pre.missing.length}` +
-                `/${pre.modules} module JSON (${pre.precached} entries total)`);
+    const ok = pre.missing.length === 0 && pre.missingPages.length === 0
+               && pre.modules === TARGETS.modules;
+    console.log(`  ${ok ? 'ok  ' : 'FAIL'}  precache covers ` +
+                `${pre.pages - pre.missingPages.length}/${pre.pages} pages and ` +
+                `${pre.modules - pre.missing.length}/${pre.modules} module JSON ` +
+                `(${pre.precached} entries total)`);
+    for (const f of pre.missingPages.slice(0, 12)) console.log(`          not precached: ${f}`);
     for (const f of pre.missing.slice(0, 12)) console.log(`          not precached: data/${f}`);
+    if (pre.missingPages.length) {
+      failures.push(`${pre.missingPages.length} student page(s) missing from the service worker precache`);
+    }
     if (pre.modules !== TARGETS.modules) {
       console.log(`          built ${pre.modules} module JSON, expected ${TARGETS.modules}`);
       failures.push(`out/data has ${pre.modules} module JSON, expected ${TARGETS.modules}`);

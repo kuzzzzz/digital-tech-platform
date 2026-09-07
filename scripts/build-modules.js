@@ -1,10 +1,17 @@
 /**
- * Writes the module JSON the app fetches at runtime.
+ * Writes the term out as machine-readable JSON, one file per module.
  *
- * Two sets, and the split is the point: public/data holds student modules
- * with every teacher field stripped, and public/data/teacher holds the full
- * ones. Writing a single set put teacherNotes, marking guides and mark
- * schemes into 22 files that any student could fetch directly.
+ * Nothing in the app reads these. Every page renders its content at build time
+ * from the markdown, so they exist as the data copy that travels on the flash
+ * drive alongside the pages - useful for a search feature, a different
+ * renderer, or anything else later.
+ *
+ * Student modules only. There used to be a full set under public/data/teacher/
+ * as well, written on the theory that the teacher page would fetch them. It
+ * never did - /teacher is a server component and reads the markdown directly -
+ * so those 22 files shipped in the export, linked from nowhere, and were the
+ * only place in the whole build where the marking guides appeared at all. A
+ * copy nothing reads cannot be worth a marking guide on a public URL.
  */
 const fs = require('fs');
 const path = require('path');
@@ -12,14 +19,18 @@ const { getAllModules, getClasses } = require('../lib/content');
 const { toStudentModule } = require('../lib/studentView');
 
 const outDir = path.join(__dirname, '../public/data');
-const teacherDir = path.join(outDir, 'teacher');
+const staleTeacherDir = path.join(outDir, 'teacher');
 
-for (const dir of [outDir, teacherDir]) {
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+
+// Left behind by an earlier build. Without this it would keep being copied
+// into the export by anyone who does not start from a clean checkout.
+if (fs.existsSync(staleTeacherDir)) {
+  fs.rmSync(staleTeacherDir, { recursive: true, force: true });
+  console.log('[build-modules] Removed the stale public/data/teacher/ copies');
 }
 
 let students = 0;
-let teachers = 0;
 for (const classId of getClasses()) {
   for (const mod of getAllModules(classId)) {
     fs.writeFileSync(
@@ -28,16 +39,7 @@ for (const classId of getClasses()) {
       'utf8'
     );
     students += 1;
-    fs.writeFileSync(
-      path.join(teacherDir, `${mod.id}.json`),
-      JSON.stringify(mod, null, 2),
-      'utf8'
-    );
-    teachers += 1;
   }
 }
 
-console.log(
-  `[build-modules] Wrote ${students} student modules to public/data/ ` +
-  `and ${teachers} full modules to public/data/teacher/`
-);
+console.log(`[build-modules] Wrote ${students} student modules to public/data/`);
