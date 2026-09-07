@@ -1,6 +1,29 @@
 import { getAllModules, getClasses } from '../../lib/content';
+import { IS_TEACHER } from '../../lib/buildTarget';
 
+/**
+ * Teacher helper notes.
+ *
+ * scripts/prune-export.js deletes this route out of a student build entirely,
+ * so in normal operation a student export never contains it. The guard below is
+ * the second lock: if the prune step is ever skipped, moved or broken, what
+ * ships is a page with nothing on it rather than every week's helper notes.
+ * Two independent things both have to fail before teacher material leaves the
+ * building.
+ */
 export default function TeacherPage() {
+  if (!IS_TEACHER) {
+    return (
+      <div>
+        <h2 style={{ marginTop: 0 }}>Not in this build</h2>
+        <p className="text-muted">
+          Teacher notes are only built into the teacher copy of the app.
+        </p>
+        <a href="/" className="btn btn-secondary">Back</a>
+      </div>
+    );
+  }
+
   const classes = getClasses();
 
   return (

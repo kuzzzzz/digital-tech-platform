@@ -1,6 +1,8 @@
 /**
  * Class picker: SS1 or SS2
  */
+import LogExport from '../components/LogExport';
+
 export default function HomePage() {
   return (
     <div>
@@ -21,6 +23,8 @@ export default function HomePage() {
       <p className="text-muted mt-2">
         Progress is saved on this device only. No account needed.
       </p>
+
+      <LogExport />
     </div>
   );
 }

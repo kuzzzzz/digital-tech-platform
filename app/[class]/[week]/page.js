@@ -68,6 +68,9 @@ export default function WeekLessonPage({ params }) {
       cards={cards}
       quizHref={quizHref}
       backHref={backHref}
+      moduleId={mod.id}
+      classId={classId}
+      week={weekNum}
     />
   );
 }

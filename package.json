@@ -4,13 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/split-content.js && node scripts/build-modules.js && next build && node scripts/relative-paths.js && node scripts/prune-export.js && node scripts/build-sw.js && node scripts/build-usb.js",
+    "build": "node scripts/build.js student",
     "start": "next start",
     "lint": "next lint",
     "split": "node scripts/split-content.js",
     "parse-sample": "node scripts/test-parser.js",
     "build-modules": "node scripts/build-modules.js",
-    "audit": "node scripts/audit.js"
+    "audit": "node scripts/audit.js",
+    "build:pipeline": "node scripts/split-content.js && node scripts/build-modules.js && next build && node scripts/relative-paths.js && node scripts/prune-export.js && node scripts/build-sw.js && node scripts/finish-build.js",
+    "build:student": "node scripts/build.js student",
+    "build:teacher": "node scripts/build.js teacher"
   },
   "dependencies": {
     "next": "^14.2.5",

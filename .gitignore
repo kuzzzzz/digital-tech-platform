@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Flash-drive copy of the export, made by scripts/build-usb.js
 /usb/
+
+# Teacher build, kept off the deploy
+/out-teacher/

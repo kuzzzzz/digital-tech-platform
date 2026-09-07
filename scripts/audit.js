@@ -301,6 +301,58 @@ function auditLinks(dir, mode) {
   return { skipped: false, pages: pages.length, checked, broken };
 }
 
+/**
+ * A student build must not contain teacher material at all.
+ *
+ * Not hidden, not gated - absent. There is no backend, so a gate would be
+ * JavaScript shipped next to the thing it guards, on phones belonging to
+ * students who are taught to read page source in SS2 week 8. The only honest
+ * protection is not putting it in the file.
+ *
+ * out/ is by construction the student build: a teacher build moves itself to
+ * out-teacher/ as its last step, so anything found here is a leak.
+ */
+function auditStudentBuild() {
+  const outDir = path.join(root, 'out');
+  if (!fs.existsSync(outDir)) return { skipped: true };
+
+  const problems = [];
+
+  const dataTeacher = path.join(outDir, 'data', 'teacher');
+  if (fs.existsSync(dataTeacher)) {
+    const n = fs.readdirSync(dataTeacher).length;
+    problems.push(`data/teacher/ is present with ${n} file(s)`);
+  }
+
+  if (fs.existsSync(path.join(outDir, 'teacher'))) {
+    problems.push('the /teacher route is present');
+  }
+
+  // The link matters separately from the route: a link surviving a removed
+  // route is a dead end on every page, and a link surviving a *present* route
+  // is the invitation the split exists to remove.
+  const linked = [];
+  (function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.name.endsWith('.html')) {
+        const html = fs.readFileSync(full, 'utf8');
+        // Any depth of "../" then teacher/, or the bare absolute form.
+        if (/(?:href|src)="(?:\.{1,2}\/)*teacher\/?"/.test(html)
+            || /(?:href|src)="\/teacher\/?"/.test(html)) {
+          linked.push(path.relative(outDir, full).split(path.sep).join('/'));
+        }
+      }
+    }
+  })(outDir);
+  if (linked.length) {
+    problems.push(`${linked.length} page(s) link to /teacher: ${linked.slice(0, 3).join(', ')}`);
+  }
+
+  return { skipped: false, problems };
+}
+
 function auditAbsolutePaths() {
   const outDir = path.join(root, 'out');
   if (!fs.existsSync(outDir)) return { skipped: true };
@@ -544,6 +596,17 @@ function main() {
     }
     if (res.broken.length > 8) console.log(`          ... and ${res.broken.length - 8} more`);
     if (!ok) failures.push(`${res.broken.length} broken link(s) in ${label}`);
+  }
+
+  const student = auditStudentBuild();
+  if (student.skipped) {
+    console.log('  --    student build not checked (no out/)');
+  } else {
+    const ok = student.problems.length === 0;
+    console.log(`  ${ok ? 'ok  ' : 'FAIL'}  out/ is a clean student build ` +
+                `(no teacher data, no /teacher route, no link to it)`);
+    for (const p of student.problems) console.log(`          ${p}`);
+    if (!ok) failures.push(`teacher material in the student build: ${student.problems.join('; ')}`);
   }
 
   if (failures.length) {

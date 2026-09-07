@@ -177,3 +177,109 @@ proven.
 Small, readable, boring JavaScript. This has to be maintainable by a teacher
 at 11pm during term. Comment the non-obvious, especially parser regex. No new
 dependency without a reason in the commit message.
+
+## Pilot Instrumentation
+
+Added for the five-student pilot (build order step 4). Two things: the build
+splits student from teacher, and the app keeps a local diagnostic log.
+
+### Split the build — student vs teacher
+
+There is no backend, so there is nothing to check a credential against. Any
+gate on `/teacher` is JavaScript shipped to the phone next to the thing it
+guards, and these students are taught to read page source in SS2 week 8. **Do
+not add a PIN.** It would be worse than an open link, because it claims a
+protection that is not there.
+
+So teacher material is not gated, it is not built:
+
+    npm run build:student   -> out/ + usb/     no data/teacher, no /teacher
+                                               route, no teacher link in header
+    npm run build:teacher   -> out-teacher/    everything
+
+Driven by `BUILD_TARGET` (`lib/buildTarget.js`). Anything that is not exactly
+`teacher` is a student build, so a typo or a forgotten flag fails towards the
+safe output. `npm run build` is `build:student`, because that is what the host
+runs.
+
+`next build` always writes to `out/`, so the teacher build **moves itself to
+`out-teacher/` as its last step**. That is what makes `out/` mean one thing —
+and it leaves no `out/` behind, deliberately: the next deploy fails loudly
+rather than quietly shipping helper notes.
+
+The student build is what deploys and what goes on flash drives. The teacher
+build stays on the teacher's own machine or a separate private deploy.
+
+Three layers, because one is not enough:
+1. `build-modules.js` writes `data/teacher/` only for a teacher target
+2. `app/teacher/page.js` renders a stub unless `IS_TEACHER`
+3. `prune-export.js` deletes the route, its chunks and any stale teacher data
+
+Audit guards (all fail the build):
+- `out/` contains any file under `data/teacher/`
+- `out/` contains a `/teacher` route
+- any HTML in `out/` links to `/teacher`
+
+This supersedes "Teacher content is reachable only under `/teacher`" above: in
+a student build it is not reachable at all, because it is not there.
+
+**Real `/teacher` auth is phase two**, when Supabase exists to check credentials
+against. Not before.
+
+### Pilot logging
+
+`lib/pilotLog.js` — append-only event log in `localStorage`, capped at 500
+events, oldest dropped first so a shared 2GB phone cannot be filled.
+
+Events: `app_open` `module_open` `card_view` (dwell measured on leaving)
+`quiz_start` `quiz_answer` `quiz_complete` `unlock` `offline_hit` `network_hit`
+`error` `bug_report` `storage_estimate` `connection_change`.
+
+Every event carries timestamp, session id, module context and online state.
+Device context — anonymous id, screen width, DPR, user agent, `effectiveType`,
+display mode, storage estimate — is recorded **once per session**, not per
+event.
+
+`unlock` records what the rule *would* say (`enforced: false`). Gating is still
+not switched on; turning it on mid-pilot could lock a student out of a lesson
+they need.
+
+**NO NAMES, NO ADMISSION NUMBERS, no free text identifying anyone.** The device
+id is a random uuid tied to nothing. Kept anonymous, this stays outside the
+NDPA for the same reason there is no login. The teacher knows which of five
+phones is which because there are five of them.
+
+The line in "Not in phase one" is about analytics **SDKs**. Still banned:
+analytics SDKs, automatic phone-home, third-party trackers, anything that
+transmits without the student pressing a button. Nothing here transmits.
+
+Service-worker cache-vs-network is recorded for **navigations only** — logging
+all 138 assets would fill the 500-event cap on the first visit and answer
+nothing extra. The worker holds the tally and a page drains it over a
+`MessageChannel`, because at the moment of a navigation the only live client is
+the page being left.
+
+### Bug reports, export, consent
+
+- **Report a problem** in the footer on every page. Three taps and a sentence;
+  module, card, online state, display mode, screen width, connection and the
+  last 20 events attach automatically. Confirmation says plainly that it is
+  saved but **not yet sent**.
+- **Send my log to the teacher** on the home screen and in Settings.
+  `navigator.share` with the file where available (one tap to WhatsApp on
+  Android), plain download otherwise.
+- **First-run notice**, plain English: what is kept, that it stays on this
+  phone, that nothing leaves unless they send it, how to erase it.
+- **Settings → Clear my data** wipes log, device id, notice flag and progress.
+  The device id goes too — keeping the identifier would not be clearing the
+  data.
+
+### Reading the logs
+
+    node scripts/pilot-report.js ./logs
+
+Per device: modules opened, cards viewed, quiz scores. Then **the card each
+device stopped at most often** — the number worth acting on, because one card
+across several devices is a broken card, not five bored students. Then median
+dwell and the five slowest cards, cache vs network, every error and bug report
+grouped, and the devices seen.

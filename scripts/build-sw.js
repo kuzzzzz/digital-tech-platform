@@ -17,6 +17,7 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const { IS_TEACHER } = require('../lib/buildTarget');
 
 const OUT = path.join(__dirname, '..', 'out');
 const SW = path.join(OUT, 'sw.js');
@@ -26,12 +27,15 @@ const PRECACHE_EXTENSIONS = /\.(html|json|js|css|webmanifest|png|svg|woff2?)$/;
 
 // Big and rarely needed offline. index.txt is Next's RSC payload duplicate of
 // each page, and the teacher copies are not for students' phones.
+// A student build has no teacher paths left by now - prune-export removed them -
+// so these two entries only matter to a teacher build, where they are the
+// difference between the teacher's own copy working offline and not. Kept as a
+// list rather than a condition so the student case stays a plain no-op.
 const SKIP = [
   /(^|\/)index\.txt$/,
-  /^data\/teacher\//,
-  /^teacher\//,
   /^404/,
 ];
+if (!IS_TEACHER) SKIP.push(/^data\/teacher\//, /^teacher\//);
 
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {

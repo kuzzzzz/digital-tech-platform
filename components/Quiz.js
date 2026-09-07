@@ -1,11 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { log, setContext } from '../lib/pilotLog';
 
 export default function Quiz({ questions = [], moduleId, classId, onComplete }) {
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
+  const startedAt = useRef(Date.now());
+
+  useEffect(() => {
+    if (!questions.length) return;
+    setContext(moduleId, null);
+    startedAt.current = Date.now();
+    log('quiz_start', { moduleId, classId, questions: questions.length });
+  }, [moduleId, classId, questions.length]);
 
   if (!questions.length) {
     return (
@@ -18,6 +27,14 @@ export default function Quiz({ questions = [], moduleId, classId, onComplete }) 
   const handleSelect = (qIndex, optIndex) => {
     if (submitted) return;
     setAnswers((prev) => ({ ...prev, [qIndex]: optIndex }));
+    // Every selection, not just the final one, so a student changing their mind
+    // on question 3 four times is visible - that is a confusing question.
+    log('quiz_answer', {
+      moduleId,
+      questionIndex: qIndex,
+      chosen: optIndex,
+      correct: optIndex === questions[qIndex].answer,
+    });
   };
 
   const handleSubmit = () => {
@@ -28,6 +45,13 @@ export default function Quiz({ questions = [], moduleId, classId, onComplete }) 
     setScore(correct);
     setSubmitted(true);
     const passed = correct / questions.length >= 0.6;
+    log('quiz_complete', {
+      moduleId,
+      score: correct,
+      total: questions.length,
+      passed,
+      duration_ms: Date.now() - startedAt.current,
+    });
     if (onComplete) onComplete(correct, questions.length, passed);
   };
 

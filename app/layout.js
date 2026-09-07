@@ -1,4 +1,7 @@
 import '../styles/globals.css';
+import { IS_TEACHER } from '../lib/buildTarget';
+import PilotRuntime from '../components/PilotRuntime';
+import SiteFooter from '../components/SiteFooter';
 
 export const metadata = {
   title: 'Digital Technologies Learning Platform',
@@ -32,10 +35,15 @@ export default function RootLayout({ children }) {
             <h1>
               <a href="/">DT Platform</a>
             </h1>
-            <a href="/teacher/">Teacher</a>
+            {/* Only in the teacher build. A student build has no /teacher
+                route at all, so a link to it would be a broken link, and a
+                hidden-but-present one would just be an invitation. */}
+            {IS_TEACHER && <a href="/teacher/">Teacher</a>}
           </header>
           <main>{children}</main>
+          <SiteFooter />
         </div>
+        <PilotRuntime />
         <script
           dangerouslySetInnerHTML={{
             __html: `

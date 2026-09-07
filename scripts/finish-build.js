@@ -1,5 +1,19 @@
 /**
- * Makes the flash-drive copy of the export, in usb/.
+ * Puts the finished build where its target expects it.
+ *
+ *   student  -> out/ stays put, and usb/ is made alongside it
+ *   teacher  -> out/ is moved to out-teacher/
+ *
+ * The move is what makes out/ mean one thing. next build always writes to out/
+ * whichever target is running, so without it a teacher build would leave the
+ * teacher copy sitting exactly where the deploy picks its files up. Moving it
+ * means out/ is only ever a student build, and "out/ contains no teacher
+ * material" becomes a check the audit can just run.
+ *
+ * A teacher build therefore leaves no out/ behind. That is deliberate: the next
+ * deploy fails loudly rather than quietly shipping helper notes.
+ *
+ * --- the usb/ copy ---
  *
  * out/ is for the web. Its links are Next's own directory form - "../ss1/" -
  * which is what the host serves and what the browser expects.
@@ -20,9 +34,12 @@
 const fs = require('fs');
 const path = require('path');
 
+const { IS_TEACHER } = require('../lib/buildTarget');
+
 const ROOT = path.join(__dirname, '..');
 const OUT = path.join(ROOT, 'out');
 const USB = path.join(ROOT, 'usb');
+const TEACHER_OUT = path.join(ROOT, 'out-teacher');
 
 const REWRITABLE_EXTENSIONS = /\.(html|txt)$/;
 
@@ -51,8 +68,19 @@ function namedIndex(fromDir, link) {
 
 function main() {
   if (!fs.existsSync(OUT)) {
-    console.error('[build-usb] No out/ - run next build first.');
+    console.error('[finish-build] No out/ - run next build first.');
     process.exit(1);
+  }
+
+  if (IS_TEACHER) {
+    fs.rmSync(TEACHER_OUT, { recursive: true, force: true });
+    fs.renameSync(OUT, TEACHER_OUT);
+    const bytes = walk(TEACHER_OUT).reduce((n, f) => n + fs.statSync(f).size, 0);
+    console.log(
+      `[finish-build] teacher build moved to out-teacher/ - ` +
+      `${(bytes / 1024 / 1024).toFixed(1)} MB. No out/ left, by design.`
+    );
+    return;
   }
 
   fs.rmSync(USB, { recursive: true, force: true });
@@ -82,11 +110,11 @@ function main() {
 
   const bytes = walk(USB).reduce((n, f) => n + fs.statSync(f).size, 0);
   console.log(
-    `[build-usb] Wrote usb/ - ${rewritten} links named, ` +
-    `${(bytes / 1024 / 1024).toFixed(1)} MB`
+    `[finish-build] student build: out/ for the web, usb/ for the drive - ` +
+    `${rewritten} links named, ${(bytes / 1024 / 1024).toFixed(1)} MB`
   );
 }
 
 if (require.main === module) main();
 
-module.exports = { USB, OUT, namedIndex };
+module.exports = { USB, OUT, TEACHER_OUT, namedIndex };

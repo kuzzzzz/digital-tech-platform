@@ -28,6 +28,33 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+// Page loads served from the cache versus fetched, kept here until a page asks
+// for them. The worker cannot just post each one as it happens: the only client
+// alive at that moment is the page being navigated away from, and it is usually
+// gone before the message arrives. Navigations only - reporting all 138 assets
+// would fill a student's 500-event log on the first visit and answer nothing
+// that the navigations do not.
+let pendingHits = [];
+
+function recordHit(request, fromCache) {
+  if (request.mode !== 'navigate') return;
+  pendingHits.push({
+    url: new URL(request.url).pathname,
+    fromCache,
+    online: self.navigator ? self.navigator.onLine !== false : null,
+  });
+  // A cap, in case nothing ever drains them.
+  if (pendingHits.length > 50) pendingHits = pendingHits.slice(-50);
+}
+
+self.addEventListener('message', (event) => {
+  if (!event.data || event.data.type !== 'drain-hits') return;
+  const hits = pendingHits;
+  pendingHits = [];
+  const port = event.ports && event.ports[0];
+  if (port) port.postMessage({ hits });
+});
+
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
@@ -35,9 +62,13 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith(
     caches.match(event.request).then((cached) => {
-      if (cached) return cached;
+      if (cached) {
+        recordHit(event.request, true);
+        return cached;
+      }
       return fetch(event.request)
         .then((response) => {
+          recordHit(event.request, false);
           if (response && response.status === 200 && response.type === 'basic') {
             const clone = response.clone();
             caches.open(CACHE_NAME).then((cache) => {
