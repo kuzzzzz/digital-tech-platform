@@ -151,6 +151,118 @@ function auditBuiltOutput() {
   return { skipped: false, leaks, files: files.length };
 }
 
+/**
+ * A reference that starts at the root of the server, and therefore at the root
+ * of the filesystem once the export is opened from a flash drive.
+ *
+ * Matched by shape - a quote or bracket, a leading slash, path characters, and
+ * a trailing slash or file extension - deliberately written separately from the
+ * pattern scripts/relative-paths.js rewrites with, so that a mistake in the fix
+ * does not silently become a blind spot in the check.
+ */
+const ABSOLUTE_REF =
+  /["'(]\/[A-Za-z0-9_.-]+(?:\/[A-Za-z0-9_.-]+)*(?:\/|\.[a-z0-9]{2,5})(?=["'\\)])/g;
+
+// Minified JavaScript is a different problem: the same shape is mostly noise
+// there. Next's router tests whether a URL endsWith("/index.txt") and core-js
+// feature-detects String.match with "/./" - neither is a reference to anything.
+// So inside a script only a path into the export's own asset folder counts.
+// That is the one that actually broke: webpack bakes its base path in as
+// p="/_next/" and loads every later chunk from the root of the filesystem.
+const ABSOLUTE_ASSET_REF = /["'(]\/_next\//g;
+
+const MARKUP = /\.(html|txt|webmanifest)$|(^|[\\/])sw\.js$/;
+
+/**
+ * The files a browser actually reads: every page, and every asset some page
+ * links to.
+ *
+ * Not simply everything under out/. next build also emits the Pages Router
+ * entry bundle, which no App Router page loads and which contains the string
+ * "/_next/" inside dead code - failing the build on output nothing requests
+ * would train whoever runs this to ignore it.
+ */
+function reachableFiles(outDir) {
+  const pages = [];
+  (function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (/\.(html|txt|webmanifest)$/.test(entry.name)) pages.push(full);
+    }
+  })(outDir);
+
+  const files = new Set(pages);
+  const sw = path.join(outDir, 'sw.js');
+  if (fs.existsSync(sw)) files.add(sw);
+
+  for (const page of pages.filter((f) => f.endsWith('.html'))) {
+    const html = fs.readFileSync(page, 'utf8');
+    for (const m of html.matchAll(/\s(?:src|href)="([^"]+)"/g)) {
+      const ref = m[1];
+      if (/^[a-z][a-z0-9+.-]*:|^\/\//i.test(ref)) continue;   // external
+      const abs = path.resolve(path.dirname(page), ref.split(/[?#]/)[0]);
+      if (abs.startsWith(outDir) && fs.existsSync(abs) && fs.statSync(abs).isFile()) {
+        files.add(abs);
+      }
+    }
+  }
+  return [...files];
+}
+
+function auditAbsolutePaths() {
+  const outDir = path.join(root, 'out');
+  if (!fs.existsSync(outDir)) return { skipped: true };
+
+  const files = reachableFiles(outDir);
+  const hits = [];
+  for (const file of files) {
+    const text = fs.readFileSync(file, 'utf8');
+    const pattern = MARKUP.test(file) ? ABSOLUTE_REF : ABSOLUTE_ASSET_REF;
+    for (const ref of new Set(text.match(pattern) || [])) {
+      hits.push({ file: path.relative(outDir, file), ref: ref.slice(1) });
+    }
+  }
+  const next = hits.filter((h) => h.ref.startsWith('/_next')).length;
+  return { skipped: false, hits, next, checked: files.length };
+}
+
+/**
+ * Whether the service worker's precache really covers the whole term.
+ *
+ * Two ways this goes wrong and neither raises an error at build time: the
+ * generator misses a file, or the build produced fewer modules than it should
+ * and the precache faithfully covers all three of them. So the module count is
+ * checked as well as the coverage.
+ */
+function auditPrecache() {
+  const outDir = path.join(root, 'out');
+  const swPath = path.join(outDir, 'sw.js');
+  if (!fs.existsSync(swPath)) return { skipped: true };
+
+  const match = fs.readFileSync(swPath, 'utf8').match(/const PRECACHE = (\[[\s\S]*?\]);/);
+  if (!match) return { skipped: false, unreadable: true };
+
+  let list;
+  try {
+    list = new Set(JSON.parse(match[1]));
+  } catch (e) {
+    return { skipped: false, unreadable: true };
+  }
+
+  const dataDir = path.join(outDir, 'data');
+  const modules = fs.existsSync(dataDir)
+    ? fs.readdirSync(dataDir).filter((f) => f.endsWith('.json')).sort()
+    : [];
+
+  return {
+    skipped: false,
+    precached: list.size,
+    modules: modules.length,
+    missing: modules.filter((f) => !list.has(`./data/${f}`)),
+  };
+}
+
 function main() {
   const modules = loadModules();
   if (!modules.length) {
@@ -259,6 +371,42 @@ function main() {
     }
     if (built.leaks.length > 12) console.log(`          ... and ${built.leaks.length - 12} more`);
     if (!ok) failures.push(`${built.leaks.length} teacher-content leak(s) in built output`);
+  }
+
+  const abs = auditAbsolutePaths();
+  if (abs.skipped) {
+    console.log('  --    absolute paths not checked (no out/)');
+  } else {
+    const ok = abs.hits.length === 0;
+    console.log(`  ${ok ? 'ok  ' : 'FAIL'}  absolute refs in export: ${abs.hits.length} ` +
+                `(${abs.next} under /_next) across ${abs.checked} reachable files`);
+    for (const h of abs.hits.slice(0, 12)) {
+      console.log(`          ${h.file}  ->  ${h.ref}`);
+    }
+    if (abs.hits.length > 12) console.log(`          ... and ${abs.hits.length - 12} more`);
+    if (!ok) {
+      failures.push(`${abs.hits.length} absolute path(s) in out/ - the export will not run from a flash drive`);
+    }
+  }
+
+  const pre = auditPrecache();
+  if (pre.skipped) {
+    console.log('  --    precache not checked (no out/sw.js)');
+  } else if (pre.unreadable) {
+    console.log('  FAIL  precache list unreadable in out/sw.js');
+    failures.push('could not read the PRECACHE list out of out/sw.js');
+  } else {
+    const ok = pre.missing.length === 0 && pre.modules === TARGETS.modules;
+    console.log(`  ${ok ? 'ok  ' : 'FAIL'}  precache covers ${pre.modules - pre.missing.length}` +
+                `/${pre.modules} module JSON (${pre.precached} entries total)`);
+    for (const f of pre.missing.slice(0, 12)) console.log(`          not precached: data/${f}`);
+    if (pre.modules !== TARGETS.modules) {
+      console.log(`          built ${pre.modules} module JSON, expected ${TARGETS.modules}`);
+      failures.push(`out/data has ${pre.modules} module JSON, expected ${TARGETS.modules}`);
+    }
+    if (pre.missing.length) {
+      failures.push(`${pre.missing.length} module JSON missing from the service worker precache`);
+    }
   }
 
   if (failures.length) {

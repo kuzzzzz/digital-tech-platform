@@ -1,13 +1,20 @@
 const CACHE_NAME = 'dtp-v1';
 const PRECACHE = ['./', './index.html', './manifest.json', './ss1/', './ss2/'];
 
+// One at a time, not cache.addAll. addAll is all-or-nothing: a single entry
+// that 404s rejects the whole batch and the term ends up cached as nothing,
+// quietly, which is the failure this list was written to stop.
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(PRECACHE).catch((err) => {
-        console.warn('[sw] precache partial fail', err);
-      });
-    })
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.all(
+        PRECACHE.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn('[sw] could not precache', url, err);
+          })
+        )
+      )
+    )
   );
   self.skipWaiting();
 });
