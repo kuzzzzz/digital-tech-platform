@@ -1,86 +1,73 @@
-'use client';
+import { getModule } from '../../../lib/content';
+import { toStudentModule } from '../../../lib/studentView';
+import { renderBody } from '../../../lib/markdown';
+import { weekLabel } from '../../../lib/moduleMeta';
+import LessonDeck from '../../../components/LessonDeck';
 
-import { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
-import LessonCard from '../../../components/LessonCard';
-
-export default function WeekLessonPage() {
-  const params = useParams();
-  const router = useRouter();
+/**
+ * A week's lesson cards, rendered into the page at build time.
+ *
+ * This used to be a client component that fetched /data/ss1-week-01.json on
+ * mount. That can never work from a flash drive: a file:// page has the opaque
+ * origin "null", so fetch() of a sibling file is a cross-origin request and the
+ * browser blocks it before the path is even considered. Making the URL relative
+ * fixed the path and changed nothing - the page still said
+ * "Could not load week 1. Failed to fetch".
+ *
+ * Reading the module here instead puts the lesson in the HTML, so the page has
+ * nothing left to load, which is also what the brief means by rendering
+ * markdown at build time.
+ *
+ * toStudentModule first, always. Whatever this hands to LessonDeck is
+ * serialised into the page source, so teacher notes and answer keys have to be
+ * gone before the props are built, not hidden by the components afterwards.
+ */
+export default function WeekLessonPage({ params }) {
   const classId = (params?.class || 'ss1').toLowerCase();
   const weekSlug = params?.week || 'week-01';
   const weekNum = parseInt(String(weekSlug).replace(/\D/g, ''), 10) || 1;
 
-  const [module, setModule] = useState(null);
-  const [cardIndex, setCardIndex] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const raw = getModule(classId, weekNum);
+  const backHref = `/${classId}/`;
 
-  useEffect(() => {
-    const url = `/data/${classId}-week-${String(weekNum).padStart(2, '0')}.json`;
-    fetch(url)
-      .then((r) => {
-        if (!r.ok) throw new Error('Module data not found. Run the build script.');
-        return r.json();
-      })
-      .then((data) => {
-        setModule(data);
-        setLoading(false);
-      })
-      .catch((e) => {
-        setError(e.message);
-        setLoading(false);
-      });
-  }, [classId, weekNum]);
-
-  if (loading) return <p>Loading lesson…</p>;
-
-  if (error || !module) {
+  if (!raw) {
     return (
       <div>
-        <p>Could not load week {weekNum}.</p>
-        <p className="text-muted">{error}</p>
-        <a href={`/${classId}/`} className="btn btn-secondary">Back to modules</a>
+        <p>Week {weekNum} is not in the content folder yet.</p>
+        <a href={backHref} className="btn btn-secondary">Back to modules</a>
       </div>
     );
   }
 
-  const allCards = (module.periods || []).flatMap((p) => p.cards || []);
-  const total = allCards.length;
-  const current = allCards[cardIndex];
+  const mod = toStudentModule(raw);
+  const cards = (mod.periods || [])
+    .flatMap((p) => p.cards || [])
+    .map((c) => ({ id: c.id, heading: c.heading, bodyHtml: renderBody(c.body) }));
 
-  const handlePrev = () => setCardIndex((i) => Math.max(0, i - 1));
-  const handleNext = () => setCardIndex((i) => Math.min(total - 1, i + 1));
-  const handleComplete = () => {
-    router.push(`/${classId}/week-${String(weekNum).padStart(2, '0')}/quiz/`);
-  };
+  const heading = `${weekLabel(mod)}: ${mod.title}`;
+  const quizHref = `/${classId}/week-${String(weekNum).padStart(2, '0')}/quiz/`;
 
-  if (total === 0) {
+  // Assessment, break and revision weeks have no cards. A deck of nothing is
+  // worse than a sentence saying so.
+  if (cards.length === 0) {
     return (
       <div>
-        <h2>Week {module.week}: {module.title}</h2>
-        <p>This week has no lesson cards (assessment or break week).</p>
-        <a href={`/${classId}/week-${String(weekNum).padStart(2, '0')}/quiz/`} className="btn">Go to Evaluation</a>
+        <h2 style={{ marginTop: 0, fontSize: '1.1rem' }}>{heading}</h2>
+        <p>This week has no lesson cards - it is sat in class.</p>
+        <a href={quizHref} className="btn">Go to Evaluation</a>
+        <p className="mt-2">
+          <a href={backHref} className="text-muted">&larr; Back to modules</a>
+        </p>
       </div>
     );
   }
 
   return (
-    <div>
-      <h2 style={{ marginTop: 0, fontSize: '1.1rem' }}>
-        Week {module.week}: {module.title}
-      </h2>
-      <LessonCard
-        card={current}
-        index={cardIndex}
-        total={total}
-        onPrev={handlePrev}
-        onNext={handleNext}
-        onComplete={handleComplete}
-      />
-      <p className="mt-2">
-        <a href={`/${classId}/`} className="text-muted">← Back to modules</a>
-      </p>
-    </div>
+    <LessonDeck
+      heading={heading}
+      cards={cards}
+      quizHref={quizHref}
+      backHref={backHref}
+    />
   );
 }

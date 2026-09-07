@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import LockBadge from './LockBadge';
 import ProgressBar from './ProgressBar';
 
@@ -18,6 +17,11 @@ import ProgressBar from './ProgressBar';
  *    gets no progress bar - a bar stuck at 0% reads as broken
  *  - locked, which stays visible and greyed rather than hidden, because a
  *    module you can see but not open is a reason to come back
+ *
+ * A plain <a>, not next/link. Link prefetches each target's RSC payload from an
+ * absolute URL, which from a flash drive means nineteen failed requests to the
+ * root of the filesystem before the list has even finished rendering. There is
+ * nothing to prefetch in an export that is already fully cached anyway.
  */
 export default function ModuleCard({
   card,
@@ -56,9 +60,9 @@ export default function ModuleCard({
   return (
     <li>
       {isLink ? (
-        <Link href={href} className="module-card">
+        <a href={href} className="module-card">
           {inner}
-        </Link>
+        </a>
       ) : (
         <div
           className={`module-card ${unlocked ? 'no-content' : 'locked'}`}
