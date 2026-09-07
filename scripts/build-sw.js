@@ -14,6 +14,7 @@
  * Run after next build and after relative-paths.
  */
 
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
@@ -60,6 +61,27 @@ function precacheList() {
     .sort();
 }
 
+/**
+ * A cache name that changes when the build does.
+ *
+ * The name was the literal 'dtp-v1' and never moved, which quietly made every
+ * deploy invisible to anyone who had already visited. The worker answers from
+ * the cache first, and activate only deletes caches under a *different* name -
+ * so the old entries survived under the same name and kept being served. A
+ * student who opened the site once would keep that version until they cleared
+ * their browser.
+ *
+ * Hashing what is in the list means the name moves exactly when the content
+ * does, and the old cache is deleted on activate rather than lingering.
+ */
+function cacheName(list) {
+  const digest = crypto.createHash('sha256')
+    .update(list.join('\n'))
+    .digest('hex')
+    .slice(0, 12);
+  return `dtp-${digest}`;
+}
+
 function main() {
   if (!fs.existsSync(SW)) {
     console.error('[build-sw] No out/sw.js - run next build first.');
@@ -67,7 +89,7 @@ function main() {
   }
   const list = precacheList();
   const source = fs.readFileSync(SW, 'utf8');
-  const replaced = source.replace(
+  let replaced = source.replace(
     /const PRECACHE = \[[\s\S]*?\];/,
     `const PRECACHE = ${JSON.stringify(list, null, 2)};`
   );
@@ -75,6 +97,18 @@ function main() {
     console.error('[build-sw] Could not find the PRECACHE list in out/sw.js.');
     process.exit(1);
   }
+
+  const name = cacheName(list);
+  const named = replaced.replace(
+    /const CACHE_NAME = '[^']*';/,
+    `const CACHE_NAME = '${name}';`
+  );
+  if (named === replaced) {
+    console.error('[build-sw] Could not find CACHE_NAME in out/sw.js.');
+    process.exit(1);
+  }
+  replaced = named;
+
   fs.writeFileSync(SW, replaced, 'utf8');
 
   const bytes = walk(OUT)
@@ -83,7 +117,7 @@ function main() {
   const modules = list.filter((p) => /^\.\/data\/.*\.json$/.test(p)).length;
   console.log(
     `[build-sw] Precaching ${list.length} files (${modules} module JSON, ` +
-    `${(bytes / 1024 / 1024).toFixed(2)} MB)`
+    `${(bytes / 1024 / 1024).toFixed(2)} MB) as ${cacheName(list)}`
   );
 }
 

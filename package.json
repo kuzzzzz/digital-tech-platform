@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/split-content.js && node scripts/build-modules.js && next build && node scripts/relative-paths.js && node scripts/prune-export.js && node scripts/build-sw.js",
+    "build": "node scripts/split-content.js && node scripts/build-modules.js && next build && node scripts/relative-paths.js && node scripts/prune-export.js && node scripts/build-sw.js && node scripts/build-usb.js",
     "start": "next start",
     "lint": "next lint",
     "split": "node scripts/split-content.js",

@@ -28,9 +28,13 @@
  *                                 and used for anything loaded after the first
  *                                 paint
  *
- * Directory links get "index.html" appended. A browser reading file:// does not
- * serve directory indexes, so "../ss1/" from a flash drive opens a file listing
- * instead of the class page. Servers are happy with the longer form either way.
+ * Links are left in Next's own directory form - "../ss1/", not
+ * "../ss1/index.html". A browser reading file:// cannot follow those, because
+ * it does not serve directory indexes, but that is the flash drive's problem
+ * and scripts/build-usb.js solves it in a separate copy. Rewriting them here
+ * broke the hosted site: every class link 404'd, because "/ss1/index.html" is
+ * not a route the host serves. One export cannot satisfy both, and pretending
+ * it could is what shipped the bug.
  *
  * Run after next build. Idempotent: rewritten paths start with "." and no
  * longer match.
@@ -81,17 +85,6 @@ const ABSOLUTE_PATH =
   /"\/([A-Za-z0-9_.-]+(?:\/[A-Za-z0-9_.-]+)*(?:\/|\.[a-z0-9]{2,5})|)(\\?)"/g;
 
 /** A path with "index.html" added when it names a directory that has one. */
-function resolveDirectory(rel) {
-  const clean = rel.replace(/\/+$/, '');
-  const target = path.join(OUT, clean);
-  if (clean && fs.existsSync(target) && fs.statSync(target).isDirectory()
-      && fs.existsSync(path.join(target, 'index.html'))) {
-    return `${clean}/index.html`;
-  }
-  if (!clean) return 'index.html';   // href="/" - the home page
-  return rel;
-}
-
 function rewriteFile(file) {
   const prefix = prefixFor(file);
   const before = fs.readFileSync(file, 'utf8');
@@ -102,7 +95,7 @@ function rewriteFile(file) {
     /(\s(?:src|href)=)"\/([^"]*)"/g,
     (m, attr, rest) => {
       changed += 1;
-      return `${attr}"${prefix}${resolveDirectory(rest)}"`;
+      return `${attr}"${prefix}${rest}"`;
     }
   );
 
@@ -112,7 +105,7 @@ function rewriteFile(file) {
   //    looking for its CSS at the root of the filesystem and rendered unstyled.
   after = after.replace(ABSOLUTE_PATH, (m, rest, escape) => {
     changed += 1;
-    return `"${prefix}${resolveDirectory(rest)}${escape}"`;
+    return `"${prefix}${rest}${escape}"`;
   });
 
   // 3. The service worker registration, which is an inline script rather than
@@ -197,5 +190,5 @@ function main() {
 if (require.main === module) main();
 
 module.exports = {
-  prefixFor, rewriteFile, rewriteRuntimeChunk, resolveDirectory, ABSOLUTE_PATH, OUT,
+  prefixFor, rewriteFile, rewriteRuntimeChunk, ABSOLUTE_PATH, OUT,
 };

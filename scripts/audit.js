@@ -219,6 +219,88 @@ function reachableFiles(outDir) {
   return [...files];
 }
 
+/**
+ * Follows every link in an export and checks something is really there.
+ *
+ * This is the check that was missing when /ss1/index.html shipped to the live
+ * site and every class link 404'd. Local proof had been a Python static server,
+ * which serves any file you name and so agreed with a link form the real host
+ * does not route.
+ *
+ * The two exports want different link forms and are checked differently:
+ *
+ *   out/  is for the web. Links stay in Next's directory form, "../ss1/", so a
+ *         link naming index.html is the regression itself and fails here.
+ *         A directory link is satisfied by the index.html inside it.
+ *
+ *   usb/  is read over file://, where nothing turns a directory into its index
+ *         page. Every link has to name a file that exists.
+ */
+function auditLinks(dir, mode) {
+  if (!fs.existsSync(dir)) return { skipped: true };
+
+  const pages = [];
+  (function walk(d) {
+    for (const entry of fs.readdirSync(d, { withFileTypes: true })) {
+      const full = path.join(d, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.name.endsWith('.html')) pages.push(full);
+    }
+  })(dir);
+
+  const broken = [];
+  let checked = 0;
+
+  for (const page of pages) {
+    const html = fs.readFileSync(page, 'utf8');
+    const from = path.relative(dir, page).split(path.sep).join('/');
+
+    for (const m of html.matchAll(/\s(?:src|href)="([^"]+)"/g)) {
+      const link = m[1];
+      // Off-site, in-page, and protocol links are not ours to resolve.
+      if (/^[a-z][a-z0-9+.-]*:|^\/\/|^#/i.test(link)) continue;
+      checked += 1;
+
+      if (mode === 'web' && /(^|\/)index\.html$/.test(link)) {
+        broken.push({ from, link, why: 'names index.html; the host serves the directory form' });
+        continue;
+      }
+
+      // Decoded first: Next writes the route chunks under a percent-encoded
+      // path, app/%5Bclass%5D/%5Bweek%5D/page-*.js, and the file on disk is
+      // app/[class]/[week]/page-*.js. The browser decodes before it looks;
+      // checking the literal string reported forty perfectly good links as
+      // broken.
+      let href = link.split(/[?#]/)[0];
+      try {
+        href = decodeURIComponent(href);
+      } catch (e) {
+        broken.push({ from, link, why: 'not a decodable URL' });
+        continue;
+      }
+      const target = path.resolve(path.dirname(page), href);
+      if (!target.startsWith(dir)) {
+        broken.push({ from, link, why: 'points outside the export' });
+        continue;
+      }
+      const isFile = fs.existsSync(target) && fs.statSync(target).isFile();
+      const isServedDir = mode === 'web'
+        && fs.existsSync(target) && fs.statSync(target).isDirectory()
+        && fs.existsSync(path.join(target, 'index.html'));
+
+      if (!isFile && !isServedDir) {
+        broken.push({
+          from,
+          link,
+          why: mode === 'usb' ? 'no such file - file:// cannot open a directory' : 'nothing there',
+        });
+      }
+    }
+  }
+
+  return { skipped: false, pages: pages.length, checked, broken };
+}
+
 function auditAbsolutePaths() {
   const outDir = path.join(root, 'out');
   if (!fs.existsSync(outDir)) return { skipped: true };
@@ -443,6 +525,25 @@ function main() {
     if (pre.missing.length) {
       failures.push(`${pre.missing.length} module JSON missing from the service worker precache`);
     }
+  }
+
+  for (const [label, dir, mode] of [
+    ['out/ (web)', path.join(root, 'out'), 'web'],
+    ['usb/ (flash drive)', path.join(root, 'usb'), 'usb'],
+  ]) {
+    const res = auditLinks(dir, mode);
+    if (res.skipped) {
+      console.log(`  --    links in ${label} not checked (not built)`);
+      continue;
+    }
+    const ok = res.broken.length === 0;
+    console.log(`  ${ok ? 'ok  ' : 'FAIL'}  links in ${label}: ${res.broken.length} broken ` +
+                `of ${res.checked} across ${res.pages} pages`);
+    for (const b of res.broken.slice(0, 8)) {
+      console.log(`          ${b.from}  ->  ${b.link}   (${b.why})`);
+    }
+    if (res.broken.length > 8) console.log(`          ... and ${res.broken.length - 8} more`);
+    if (!ok) failures.push(`${res.broken.length} broken link(s) in ${label}`);
   }
 
   if (failures.length) {
